@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="daybook">
+<head>
+  <title>Angular example</title>
+  <!--angular modules-->
+  <script src='includes/js/lib/angular/angular.js'></script>
+  <script src='includes/js/lib/angular/angular-resource.js'></script>
+  <script src='includes/js/lib/angular/angular-route.js'></script>
+
+  <!--angular ui -->
+  <script src='includes/js/lib/angular-ui/ui-bootstrap-tpls-0.11.0'></script>
+
+  <!-- quint -->
+  <script src='includes/js/lib/qunit/qunit-1.14.0.js'></script>
+
+  <!-- bootstrap -->
+  <script src='includes/js/lib/bootstrap/js/bootstrap.js'></script>
+  <link rel="stylesheet" type="text/css" href="includes/js/lib/bootstrap/css/bootstrap.css">
+
+  <!-- daybook source -->
+  <script src='includes/js/utils.js'></script>
+  <script src='includes/js/app.js'></script>
+  <script src='includes/js/services/CalendarService.js'></script>
+  <script src='includes/js/controller/CalendarController.js'></script>
+
+  <link rel="stylesheet" type="text/css" href="includes/css/calendar.css">
+</head>
+<body>
+    <div ng-view></div>
+</body>
+</html>
