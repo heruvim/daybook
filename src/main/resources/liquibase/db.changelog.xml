@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+  <changeSet id="26.04.2014-10:42" author="serfeo">
+    <comment>create events table</comment>
+    <sql>
+      create table events ( id int PRIMARY KEY auto_increment,
+                            name varchar(50),
+                            comment varchar(255),
+                            date bigint )
+    </sql>
+    <rollback>drop table events</rollback>
+  </changeSet>
+
+  <changeSet id="09.05.2014-11:26" author="serfeo">
+    <comment>create users table</comment>
+    <sql>
+      create table users ( id int PRIMARY KEY auto_increment,
+                           login varchar(20),
+                           password varchar(50),
+                           nickname varchar(50) )
+    </sql>
+    <rollback>drop table users</rollback>
+  </changeSet>
+
+  <changeSet id="09.05.2014-11:36" author="serfeo">
+    <comment>add user id to event table</comment>
+    <sql>
+      alter table events add column userId int
+    </sql>
+    <rollback>
+      alter table events drop column userId
+    </rollback>
+  </changeSet>
+
+  <changeSet id="09.05.2014-11:46" author="serfeo">
+    <comment>set user id as foreign key in events table</comment>
+    <sql>
+      alter table events add foreign key (userId) references users(id)
+    </sql>
+    <rollback>
+      alter table events drop foreign key userId
+    </rollback>
+  </changeSet>
+</databaseChangeLog>
