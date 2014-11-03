@@ -20,23 +20,32 @@
                 </div>
             </div>
             <button class='btn btn-default' ng-click='addNewItem()'>
-                <span class="glyphicon glyphicon-plus">Add</span>
+                <span class="glyphicon glyphicon-plus">{{addLabel}}</span>
             </button>
         </form>
     </div>
     <div class='col-xs-8'>
         <table class='table'>
             <tbody>
-                <tr>
+                <tr class="header">
                     <th class='button_column'></th>
-                    <th>Name</th>
-                    <th>Count Name</th>
-                    <th style='width:50px'>Price</th>
+                    <th class='button_column'></th>
+                    <th>
+                        <span ng-click="changeOrder('name')">Name</span>
+                        <input ng-model="filter" class="form-control filter" type="text" placeholder="filter"/>
+                    </th>
+                    <th><span ng-click="changeOrder('countName')">Count Name</span></th>
+                    <th style='width:50px'><span ng-click="changeOrder('price')">Price</span></th>
                 </tr>
-                <tr ng-repeat='item in listItems'>
+                <tr ng-repeat='item in listItems | orderBy:order:reverse | filter:filter'>
                     <td>
                         <button ng-click="deleteItem( item )" class='btn btn-default btn-xs'>
                             <span class='glyphicon glyphicon-minus'></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button ng-click="editItem( item )" class='btn btn-default btn-xs'>
+                            <span class='glyphicon glyphicon-pencil'></span>
                         </button>
                     </td>
                     <td><span>{{ item.name }}</span></td>

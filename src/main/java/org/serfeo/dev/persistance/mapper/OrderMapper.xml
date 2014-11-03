@@ -67,4 +67,10 @@
         ON Items.id = OrderItems.itemId
         WHERE Items.id = #{id}
     </delete>
+
+    <update id="updateItem" parameterType="Item">
+        UPDATE Items
+        SET name=#{name}, countName=#{countName}, price=#{price}
+        WHERE id=#{id}
+    </update>
 </mapper>

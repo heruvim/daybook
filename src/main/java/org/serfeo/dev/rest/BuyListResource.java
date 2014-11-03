@@ -99,6 +99,15 @@ public class BuyListResource
         return item;
     }
 
+    @PUT
+    @Consumes( MediaType.APPLICATION_JSON )
+    @Produces( MediaType.APPLICATION_JSON )
+    @Path( "items" )
+    public CommonResponse updateItem( Item item ) {
+        orderMapperDAO.updateItem( item );
+        return CommonResponse.ok();
+    }
+
     @DELETE
     @Consumes( MediaType.APPLICATION_JSON )
     @Produces( MediaType.APPLICATION_JSON )

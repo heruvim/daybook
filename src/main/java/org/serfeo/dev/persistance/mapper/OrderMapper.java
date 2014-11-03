@@ -25,4 +25,6 @@ public interface OrderMapper {
     void deleteBuyListById( @Param( "id" ) int id );
 
     void deleteItemById( @Param( "id" ) int id );
+
+    void updateItem( Item item );
 }

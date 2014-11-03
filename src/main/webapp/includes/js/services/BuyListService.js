@@ -13,7 +13,8 @@ angular.module( "daybook" )
 } ).
 factory( "itemCompletionService", function( $resource ) {
     return $resource( "rest/buylist/items/:id", {}, {
-        deleteItem: { method: "DELETE" },
+        updateItem:   { method: "PUT" },
+        deleteItem:   { method: "DELETE" },
         getItemNames: { method: "GET", isArray: true }
     } );
 } );

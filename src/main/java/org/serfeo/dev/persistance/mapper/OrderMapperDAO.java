@@ -16,23 +16,15 @@ public class OrderMapperDAO {
     private OrderMapper mapper;
 
     @Inject
-    public OrderMapperDAO( OrderMapper mapper ) {
-        this.mapper = mapper;
-    }
+    public OrderMapperDAO( OrderMapper mapper ) { this.mapper = mapper; }
 
-    public List<Order> getAllOrders() {
-        return mapper.getAllOrders();
-    }
+    public List<Order> getAllOrders() { return mapper.getAllOrders(); }
 
-    public List<Item> getAllItems() {
-        return mapper.getAllItems();
-    }
+    public List<Item> getAllItems() { return mapper.getAllItems(); }
 
-    public void insertOrder( Order order ) {
-        mapper.insertOrderData( order );
-    }
+    public void insertOrder( Order order ) { mapper.insertOrderData( order ); }
 
-    public void deleteBuyListById( int id ) { mapper.deleteBuyListById( id ); };
+    public void deleteBuyListById( int id ) { mapper.deleteBuyListById( id ); }
 
     public BuyList getBuyListById( int id ) { return mapper.getBuyListById( id ); }
 
@@ -48,11 +40,9 @@ public class OrderMapperDAO {
             mapper.insertItem( item );
     }
 
-    public void insertItem( Item item ) {
-        mapper.insertItem( item );
-    }
+    public void insertItem( Item item ) { mapper.insertItem( item ); }
 
-    public void deleteItemById( int id ) {
-        mapper.deleteItemById( id );
-    }
+    public void deleteItemById( int id ) { mapper.deleteItemById( id ); }
+
+    public void updateItem( Item item ) { mapper.updateItem( item ); }
 }
