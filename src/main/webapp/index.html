@@ -3,29 +3,62 @@
 <head>
   <title>Angular example</title>
   <!--angular modules-->
-  <script src='includes/js/lib/angular/angular.js'></script>
-  <script src='includes/js/lib/angular/angular-resource.js'></script>
-  <script src='includes/js/lib/angular/angular-route.js'></script>
+  <script src='includes/lib/angular/angular.js'></script>
+  <script src='includes/lib/angular/angular-resource.js'></script>
+  <script src='includes/lib/angular/angular-route.js'></script>
+
+  <!-- autocomplete plugin -->
+  <script src='includes/lib/angular-modules/angucomplete.js'></script>
+  <link rel="stylesheet" type="text/css" href="includes/lib/angular-modules/angucomplete.css">
 
   <!--angular ui -->
-  <script src='includes/js/lib/angular-ui/ui-bootstrap-tpls-0.11.0'></script>
+  <script src='includes/lib/angular-ui/ui-bootstrap-tpls-0.11.2.js'></script>
 
   <!-- quint -->
-  <script src='includes/js/lib/qunit/qunit-1.14.0.js'></script>
+  <script src='includes/lib/qunit/qunit-1.14.0.js'></script>
 
   <!-- bootstrap -->
-  <script src='includes/js/lib/bootstrap/js/bootstrap.js'></script>
-  <link rel="stylesheet" type="text/css" href="includes/js/lib/bootstrap/css/bootstrap.css">
+  <script src='includes/lib/bootstrap/dependencies/jquery-2.1.1.js'></script>
+  <script src='includes/lib/bootstrap/js/bootstrap.js'></script>
+  <link rel="stylesheet" type="text/css" href="includes/lib/bootstrap/css/bootstrap.css">
 
   <!-- daybook source -->
   <script src='includes/js/utils.js'></script>
   <script src='includes/js/app.js'></script>
   <script src='includes/js/services/CalendarService.js'></script>
+  <script src='includes/js/services/BuyListService.js'></script>
   <script src='includes/js/controller/CalendarController.js'></script>
+  <script src='includes/js/controller/MainPageController.js'></script>
+  <script src='includes/js/controller/BuyListController.js'></script>
+  <script src='includes/js/controller/ItemsController.js'></script>
+  <script src='includes/js/controller/ModalController.js'></script>
 
   <link rel="stylesheet" type="text/css" href="includes/css/calendar.css">
+  <link rel="stylesheet" type="text/css" href="includes/css/buylist.css">
 </head>
 <body>
-    <div ng-view></div>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href='#/calendar'>Calendar</a></li>
+                <li><a href='#/buylist'>BuyList</a></li>
+                <li><a href='#/items'>Items</a></li>
+            </ul>
+
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Login">
+                    <input type="password" class="form-control" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </form>
+        </div>
+    </div>
+    <div class="container-fluid" ng-view></div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <div class="container-fluid">
+            <p class="navbar-text">M&M Inc. All rights reserved.</p>
+        </div>
+    </nav>
 </body>
 </html>

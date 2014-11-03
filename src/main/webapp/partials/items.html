@@ -1,0 +1,49 @@
+<div class='row'>
+    <div class='col-xs-4'>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input ng-model='item.name' class="form-control" id="name" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="countName" class="col-sm-2 control-label">Count name</label>
+                <div class="col-sm-10">
+                    <input ng-model='item.countName' class="form-control" id="countName" placeholder="Count Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-sm-2 control-label">Price</label>
+                <div class="col-sm-10">
+                    <input ng-model='item.price' class="form-control" id="price" placeholder="Price">
+                </div>
+            </div>
+            <button class='btn btn-default' ng-click='addNewItem()'>
+                <span class="glyphicon glyphicon-plus">Add</span>
+            </button>
+        </form>
+    </div>
+    <div class='col-xs-8'>
+        <table class='table'>
+            <tbody>
+                <tr>
+                    <th class='button_column'></th>
+                    <th>Name</th>
+                    <th>Count Name</th>
+                    <th style='width:50px'>Price</th>
+                </tr>
+                <tr ng-repeat='item in listItems'>
+                    <td>
+                        <button ng-click="deleteItem( item )" class='btn btn-default btn-xs'>
+                            <span class='glyphicon glyphicon-minus'></span>
+                        </button>
+                    </td>
+                    <td><span>{{ item.name }}</span></td>
+                    <td><span>{{ item.countName }}</span></td>
+                    <td><span>{{ item.price }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

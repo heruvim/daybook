@@ -1,66 +1,50 @@
-<div ng-controller='CalendarController'>
-  <div class='calendar left_div'>
-    <table>
-      <tbody>
-      <tr>
-        <th><span class="button" ng-click="prevMonth()"><<</span></th>
-        <th colspan="5">
-          <span>{{currentDate.getFullYear()}}, </span>
-          <span>{{monthNames[ currentDate.getMonth() ]}}</span>
-        </th>
-        <th><span class="button" ng-click="nextMonth()">>></span></th>
-      </tr>
-      <tr><th ng-repeat="day in dayNames">{{day}}</th></tr>
-      <tr ng-repeat="currentWeek in weeksArray">
-        <td ng-repeat="currentDate in currentWeek"
-            ng-class="{'selected_date': isSelectedDate(currentDate.date), 'event': hasEvent(currentDate)}"
-            ng-click="chooseEvent( currentDate.eventIds, currentDate.date )">
-          {{currentDate.date}}
-        </td>
-      </tr>
-      </tbody>
-    </table>
+<div class='row' ng-controller='CalendarController'>
+    <div class='col-xs-4 calendar'>
+        <table>
+            <tbody>
+                <tr>
+                    <th><span class="button" ng-click="changeMonth(-1)"><<</span></th>
+                    <th colspan="5">
+                        <span>{{currentDate.getFullYear()}}, </span>
+                        <span>{{monthNames[ currentDate.getMonth() ]}}</span>
+                    </th>
+                    <th><span class="button" ng-click="changeMonth(1)">>></span></th>
+                </tr>
+                <tr><th ng-repeat="day in dayNames">{{day}}</th></tr>
+                <tr ng-repeat="currentWeek in weeksArray">
+                    <td ng-repeat="currentDate in currentWeek"
+                        ng-class="{'selected_date': isSelectedDate( currentDate.date ),
+                                   'event': currentDate.hasEvent,
+                                   'holiday': currentDate.isHoliday }"
+                        ng-click="chooseEvent( currentDate )">{{currentDate.date}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <div>
-      <span>Current events:</span>
-      <li ng-repeat="currentEvent in currentEvents">
-        {{currentEvent.name}}
-        <p ng-show="currentEvent.comment">{{currentEvent.comment}}</p>
-        <p ng-show="currentEvent.date">{{ getTimeStringFromDate( currentEvent.date ) }}</p>
-      </li>
+        <button class='btn btn-default' ng-click='open()'>
+            <span class="glyphicon glyphicon-plus">Add</span>
+        </button>
     </div>
-  </div>
-  <div right_div>
-    <div>
-      <span>Add calendar event:</span>
-      <table>
-        <tbody>
-          <tr>
-            <td><span>Name:</span></td>
-            <td><input type="text" ng-model="newEvent.name"></td>
-          </tr>
-          <tr>
-            <td><span>Comment:</span></td>
-            <td><input type="text" ng-model="newEvent.comment"></td>
-          </tr>
-          <tr>
-            <td><span>Date:</span></td>
-            <td><span>{{currentDate.toFormattedString()}}</span></td>
-          </tr>
-          <tr>
-            <td><span>Hour:</span></td>
-            <td><input type="text" ng-model="newEvent.hour"></td>
-          </tr>
-          <tr>
-            <td><span>Minute:</span></td>
-            <td><input type="text" ng-model="newEvent.minute"></td>
-          </tr>
-          <tr>
-            <td><input type="button" value="Add" ng-click="addEvent()"></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class='col-xs-8'>
+        <table class='table event_table'>
+            <tbody>
+                <tr>
+                    <th class='button_column'></th>
+                    <th>Name</th>
+                    <th>Comment</th><th class='date_column'>Date</th>
+                </tr>
+                <tr ng-repeat='currentEvent in currentEvents | orderBy:"date"'>
+                    <td>
+                        <button ng-click="deleteEvent( currentEvent.id )" class='btn btn-default btn-xs' ng-show='currentEvent.date'>
+                            <span class='glyphicon glyphicon-minus'></span>
+                        </button>
+                    </td>
+                    <td><span>{{ currentEvent.name }}</span></td>
+                    <td><span ng-show='currentEvent.comment'>{{ currentEvent.comment }}</span></td>
+                    <td><span ng-show='currentEvent.date'>{{ getTimeStringFromDate( currentEvent.date ) }}</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
 </div>
+

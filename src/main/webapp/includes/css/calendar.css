@@ -1,31 +1,58 @@
-.calendar .event
-{
-  background-color: red;
+.calendar .event {
+    background-color: red !important;
+    border: 1px solid red;
 }
 
-.calendar .button
-{
-  cursor: pointer;
+.calendar .holiday {
+    background-color: #c1ffc1;
+    border: 1px solid #c1ffc1;
 }
 
-.left_div, right_div
-{
-  float: left;
-  height: 100%;
-  padding: 20px;
+.calendar .button {
+    cursor: pointer;
 }
 
-.selected_date
-{
-  border: 1px solid orange !important;
+.left_div, right_div {
+    float: left;
+    height: 100%;
+    padding: 20px;
 }
 
-.calendar td
-{
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  background-color: #dadada;
-  border: 1px solid #dadada;
-  cursor: pointer;
+.selected_date {
+    border: 1px solid orange !important;
+}
+
+.calendar table {
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+
+.calendar td {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background-color: #ffffe0;
+    border: 1px solid #ffffe0;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.calendar th {
+    text-align: center;
+}
+
+.modal {
+    display: block;
+}
+
+.event_table {
+    table-layout: fixed;
+}
+
+.event_table .date_column {
+    width: 100px;
+}
+
+.event_table .button_column {
+    width: 40px;
 }

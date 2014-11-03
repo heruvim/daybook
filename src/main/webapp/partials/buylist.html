@@ -1,0 +1,64 @@
+<div class='row'>
+    <div class='col-xs-4'>
+        <button class='btn btn-default' ng-click='open()'>
+            <span class="glyphicon glyphicon-plus">Add</span>
+        </button>
+        <button class='btn btn-default' ng-click='saveBuyList()'>
+            <span class="glyphicon glyphicon-check">Complete</span>
+        </button>
+
+        <table class='table'>
+            <tbody>
+                <tr>
+                    <th class='button_column'></th>
+                    <th>Name</th>
+                    <th style='width:30px'>Count</th>
+                    <th style='width:30px'></th>
+                    <th style='width:50px'>Price</th>
+                </tr>
+                <tr ng-repeat='currentListItem in currentListItems'>
+                    <td>
+                        <button ng-click="deleteListItem( currentListItem )" class='btn btn-default btn-xs'>
+                            <span class='glyphicon glyphicon-minus'></span>
+                        </button>
+                    </td>
+                    <td><span>{{ currentListItem.name }}</span></td>
+                    <td><span style='float: right'>{{ currentListItem.count }}</span></td>
+                    <td><span>{{ currentListItem.countName }}</span></td>
+                    <td><span>{{ currentListItem.price }}</span></td>
+                </tr>
+                <tr>
+                    <td colspan='4'><span style='float: right; padding: 0px 15px;'>Total:</span></td>
+                    <td>{{ getTotalPrice() }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class='col-xs-8'>
+        <span class='title'>Prev buy lists:</span>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th class='button_column'></th>
+                    <th class='button_column'></th>
+                    <th>Date</th><th>Price</th><th>Count</th>
+                </tr>
+                <tr ng-repeat='prevBuyList in prevBuyLists'>
+                    <td>
+                        <button ng-click="deleteBuyList( prevBuyList )" class='btn btn-default btn-xs'>
+                            <span class='glyphicon glyphicon-minus'></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button ng-click="getBuyListById( prevBuyList.id )" class='btn btn-default btn-xs'>
+                            <span class='glyphicon glyphicon-eye-open'></span>
+                        </button>
+                    </td>
+                    <td><span>{{ getDateStringFromDate( prevBuyList.date ) }}</span></td>
+                    <td><span>{{ prevBuyList.totalPrice }}</span></td>
+                    <td><span>{{ prevBuyList.totalCount }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

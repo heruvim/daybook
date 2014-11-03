@@ -1,0 +1,27 @@
+.creating_buy_list {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 300px;
+}
+
+.creating_buy_list td {
+    padding: 2px;
+}
+
+.new_buy_list_item td {
+    padding: 5px 10px;
+}
+
+.small_width {
+    width: 40px;
+}
+
+.title {
+    font-weight: bolder;
+    padding-top: 10px;
+    display: block;
+}
+
+.button_column {
+    width: 40px;
+}
