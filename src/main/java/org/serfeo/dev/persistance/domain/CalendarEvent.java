@@ -1,4 +1,4 @@
-package org.serfeo.dev.beans;
+package org.serfeo.dev.persistance.domain;
 
 public class CalendarEvent
 {

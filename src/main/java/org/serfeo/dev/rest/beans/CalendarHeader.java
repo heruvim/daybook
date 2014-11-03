@@ -1,4 +1,4 @@
-package org.serfeo.dev.beans;
+package org.serfeo.dev.rest.beans;
 
 import com.google.inject.Inject;
 
