@@ -4,6 +4,14 @@ public class OrderItem
 {
     public OrderItem() {}
 
+    public OrderItem( int count,
+                      long itemId,
+                      long orderId ) {
+        this.count = count;
+        this.itemId = itemId;
+        this.orderId = orderId;
+    }
+
     private long id;
     private int count;
     private long itemId;

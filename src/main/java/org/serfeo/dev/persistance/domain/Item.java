@@ -4,18 +4,17 @@ public class Item
 {
     public Item() {}
 
-    public Item(String name,
-                long countNameId,
-                float price)
-    {
+    public Item( String name,
+                 String countName,
+                 float price) {
         this.name = name;
-        this.countNameId = countNameId;
+        this.countName = countName;
         this.price = price;
     }
 
     private long id;
     private String name;
-    private long countNameId;
+    private String countName;
     private float price;
 
     public long getId() { return id; }
@@ -27,7 +26,7 @@ public class Item
     public float getPrice() { return price; }
     public void setPrice( float price ) { this.price = price; }
 
-    public long getCountNameId() { return countNameId; }
-    public void setCountNameId( long countNameId ) { this.countNameId = countNameId; }
+    public String getCountName() { return countName; }
+    public void setCountName( String countName ) { this.countName = countName; }
 
 }

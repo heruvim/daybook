@@ -1,50 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-  <changeSet id="26.04.2014-10:42" author="serfeo">
-    <comment>create events table</comment>
-    <sql>
-      create table events ( id int PRIMARY KEY auto_increment,
-                            name varchar(50),
-                            comment varchar(255),
-                            date bigint )
-    </sql>
-    <rollback>drop table events</rollback>
-  </changeSet>
+    <changeSet id="26.04.2014-10:42" author="serfeo">
+        <comment>create events table</comment>
+        <sql>
+            create table events (
+                id int auto_increment,
+                name varchar(50),
+                comment varchar(255),
+                date bigint,
+                PRIMARY KEY (id) )
+            ENGINE=InnoDB DEFAULT CHARSET='utf8'
+        </sql>
+        <rollback>drop table events</rollback>
+    </changeSet>
 
-  <changeSet id="09.05.2014-11:26" author="serfeo">
-    <comment>create users table</comment>
-    <sql>
-      create table users ( id int PRIMARY KEY auto_increment,
-                           login varchar(20),
-                           password varchar(50),
-                           nickname varchar(50) )
-    </sql>
-    <rollback>drop table users</rollback>
-  </changeSet>
+    <changeSet id="09.05.2014-11:26" author="serfeo">
+        <comment>create users table</comment>
+        <sql>
+            create table users (
+                id int auto_increment,
+                login varchar(20),
+                password varchar(50),
+                nickname varchar(50),
+                PRIMARY KEY (id) )
+            ENGINE=InnoDB DEFAULT CHARSET='utf8'
+        </sql>
+        <rollback>drop table users</rollback>
+    </changeSet>
 
-  <changeSet id="09.05.2014-11:36" author="serfeo">
-    <comment>add user id to event table</comment>
-    <sql>
-      alter table events add column userId int
-    </sql>
-    <rollback>
-      alter table events drop column userId
-    </rollback>
-  </changeSet>
+    <changeSet id="09.05.2014-11:36" author="serfeo">
+        <comment>add user id to event table</comment>
+        <sql>
+            alter table events add column userId int
+        </sql>
+        <rollback>
+            alter table events drop column userId
+        </rollback>
+    </changeSet>
 
-  <changeSet id="09.05.2014-11:46" author="serfeo">
-    <comment>set user id as foreign key in events table</comment>
-    <sql>
-      alter table events add foreign key (userId) references users(id)
-    </sql>
-    <rollback>
-      alter table events drop foreign key userId
-    </rollback>
-  </changeSet>
+    <changeSet id="09.05.2014-11:46" author="serfeo">
+        <comment>set user id as foreign key in events table</comment>
+        <sql>
+            alter table events add foreign key (userId) references users(id)
+        </sql>
+        <rollback>
+            alter table events drop foreign key userId
+        </rollback>
+    </changeSet>
+
+    <changeSet id="18.05.2014-21.48" author="serfeo">
+        <comment>create item list table</comment>
+        <sql>
+            create table items(
+                id int auto_increment,
+                name varchar(50),
+                countName varchar(10),
+                price float,
+                PRIMARY KEY (id) )
+            ENGINE=InnoDB DEFAULT CHARSET='utf8'
+        </sql>
+        <rollback>
+            drop table items
+        </rollback>
+    </changeSet>
+
+    <changeSet id="18.05.2014-21.52" author="serfeo">
+        <comment>create orders table</comment>
+        <sql>
+            create table orders(
+                id int auto_increment,
+                date bigint,
+                totalPrice float,
+                totalCount int,
+                PRIMARY KEY (id) )
+            ENGINE=InnoDB DEFAULT CHARSET='utf8'
+        </sql>
+        <rollback>
+            drop table order
+        </rollback>
+    </changeSet>
+
+    <changeSet id="18.05.2014-21.55" author="serfeo">
+        <comment>create order table</comment>
+        <sql>
+            create table orderItems(
+                id int auto_increment,
+                itemId int NOT NULL,
+                orderId int NOT NULL,
+                count int,
+                PRIMARY KEY (id ) )
+            ENGINE=InnoDB DEFAULT CHARSET='utf8'
+        </sql>
+        <rollback>
+            drop table orderItems
+        </rollback>
+    </changeSet>
+
+    <changeSet id="15.10.2014-20.00" author="serfeo">
+        <comment>modify name column to unique in items table</comment>
+        <sql>
+            alter table `items` modify name varchar(50) unique not null;
+        </sql>
+        <rollback>
+            alter table `items` modify name varchar(50);
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

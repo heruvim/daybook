@@ -15,7 +15,7 @@
   </filter-mapping>
 
   <listener>
-    <listener-class>org.serfeo.dev.rest.GuiceListener</listener-class>
+    <listener-class>org.serfeo.dev.guice.ContextListener</listener-class>
   </listener>
 
 </web-app>

@@ -1,7 +1,5 @@
 package org.serfeo.dev.rest.response;
 
-import java.util.Set;
-
 public class CommonResponse
 {
     private String status;
@@ -34,11 +32,18 @@ public class CommonResponse
         public void setValue( String value ) { this.value = value; }
     }
 
+    public static CommonResponse ok() {
+        return ok( null );
+    }
+
     public static CommonResponse ok( Param[] params )
     {
         CommonResponse commonResponse = new CommonResponse();
         commonResponse.setStatus( "ok" );
-        commonResponse.setParams( params );
+
+        if ( params != null )
+            commonResponse.setParams( params );
+
         return commonResponse;
     }
 }

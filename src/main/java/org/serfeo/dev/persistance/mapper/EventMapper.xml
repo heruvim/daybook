@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.serfeo.dev.persistance.mapper.EventMapper">
+    <insert id="insert" parameterType="CalendarEvent">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        insert into events( name, comment, date, userId )
+        values ( #{name}, #{comment}, #{date}, #{userId} )
+    </insert>
+</mapper>

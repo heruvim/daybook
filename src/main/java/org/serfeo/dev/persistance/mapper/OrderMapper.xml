@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.serfeo.dev.persistance.mapper.OrderMapper">
+    <resultMap id="BuyListMapper" type="BuyList">
+        <result property="id" column="buyListId"/>
+        <result property="date" column="date"/>
+        <collection property="items" ofType="BuyListItem">
+            <result property="name" column="name"/>
+            <result property="countName" column="countName"/>
+            <result property="count" column="count"/>
+            <result property="price" column="price"/>
+        </collection>
+    </resultMap>
+
+    <select id="getBuyListById" resultMap="BuyListMapper">
+        select * from
+            ( select id as buyListId, date from orders where id=#{id} ) orders
+        LEFT JOIN
+            ( select orderId, itemId, count from OrderItems where orderId=#{id} ) oi
+            ON orders.buyListId = oi.orderId
+        LEFT JOIN
+            ( select id, name, countName, price from Items ) it
+        ON oi.itemId = it.id
+    </select>
+
+    <insert id="insertOrderItem" parameterType="OrderItem">
+        INSERT INTO `orderItems`( `count`, `itemId`, `orderId` )
+        VALUES ( #{count}, #{itemId}, #{orderId} )
+    </insert>
+
+    <insert id="insertOrderData" parameterType="Order">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+        INSERT INTO `orders`( `date`, `totalPrice`, `totalCount` )
+        VALUES ( #{date}, #{totalPrice}, #{totalCount} )
+    </insert>
+
+    <insert id="insertItem" parameterType="Item">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+        INSERT INTO `items`( `name`, `countName`, `price` )
+            VALUES ( #{name}, #{countName}, #{price} )
+        ON DUPLICATE KEY UPDATE
+            name=#{name},
+            countName=#{countName},
+            price=#{price}
+    </insert>
+
+    <delete id="deleteBuyListById">
+        DELETE Orders, OrderItems FROM
+            Orders
+        JOIN
+            OrderItems
+        ON orders.id = OrderItems.orderId
+        WHERE orders.id = #{id}
+    </delete>
+
+    <delete id="deleteItemById">
+        DELETE Items, OrderItems FROM
+            Items
+        LEFT JOIN
+            OrderItems
+        ON Items.id = OrderItems.itemId
+        WHERE Items.id = #{id}
+    </delete>
+</mapper>

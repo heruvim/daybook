@@ -2,34 +2,26 @@ package org.serfeo.dev.guice;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Scopes;
+import com.google.inject.Module;
 import com.google.inject.servlet.GuiceServletContextListener;
-import com.google.inject.servlet.ServletModule;
-import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
-import org.serfeo.dev.rest.BuyListResource;
-import org.serfeo.dev.rest.CalendarResource;
+import org.serfeo.dev.guice.module.PersistenceModule;
+import org.serfeo.dev.guice.module.RestModule;
 
-public class ContextListener extends GuiceServletContextListener
-{
+import java.util.LinkedList;
+import java.util.List;
+
+public class ContextListener extends GuiceServletContextListener {
     @Override
-    protected Injector getInjector()
-    {
-        return Guice.createInjector( new ServletModule()
-        {
-            @Override
-            protected void configureServlets()
-            {
-                bind( CalendarResource.class );
-                bind( BuyListResource.class );
+    protected Injector getInjector() {
+        return Guice.createInjector( getModules() );
+    }
 
-                bind( GuiceContainer.class );
-                bind( JacksonJsonProvider.class ).in( Scopes.SINGLETON );
+    private List<Module> getModules() {
+        List<Module> modules = new LinkedList<>();
 
-                serve("/rest*").with( GuiceContainer.class );
+        modules.add( new RestModule() );
+        modules.add( new PersistenceModule() );
 
-                
-            }
-        } );
+        return modules;
     }
 }
