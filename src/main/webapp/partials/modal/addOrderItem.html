@@ -3,38 +3,59 @@
         <h3 class="modal-title">Add Item</h3>
     </div>
     <div class="modal-body">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" name="addItemForm">
+            <div class="alert alert-warning" role="alert" ng-show="addItemForm.name.$dirty && addItemForm.name.$error.required">
+                <span>Please, enter name</span>
+            </div>
+
+            <div class="alert alert-warning" role="alert" ng-show="addItemForm.countName.$dirty && addItemForm.countName.$error.required">
+                <span>Please, enter count name</span>
+            </div>
+
+            <div class="alert alert-warning" role="alert" ng-show="addItemForm.count.$dirty && addItemForm.count.$error.required">
+                <span>Please, enter valid count. Count must be a number</span>
+            </div>
+
+            <div class="alert alert-warning" role="alert" ng-show="addItemForm.price.$dirty && addItemForm.price.$error.required">
+                <span>Please, enter valid price. Price must be a number</span>
+            </div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
                     <angucomplete id="name"
                                   pause="100"
-                                  placeholder="Name"
+                                  placeholder="name"
                                   selectedobject="autocomplete"
                                   searchfields="name"
                                   titlefield="name"
                                   minlength=1
                                   localdata="itemNames"
-                                  inputclass="form-control form-control-small"/>
+                                  inputclass="form-control form-control-small"
+                                  name="name"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="count" class="col-sm-2 control-label">Count</label>
                 <div class="col-sm-10">
-                    <input ng-model='creatingListItem.count' class="form-control" id="count" placeholder="Name">
-                    <input ng-model='creatingListItem.countName' class="form-control" id="type" placeholder="Type">
+                    <input ng-model='creatingListItem.count' type="number" name="count" required
+                           class="form-control count" id="count" placeholder="count">
+                    <input ng-model='creatingListItem.countName' name="countName" required
+                           class="form-control count_name" id="type" placeholder="name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="price" class="col-sm-2 control-label">Price</label>
                 <div class="col-sm-10">
-                    <input ng-model='creatingListItem.price' class="form-control" id="price" placeholder="prices">
+                    <input ng-model='creatingListItem.price' type="number" name="price" required
+                           class="form-control" id="price" placeholder="prices">
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="addNewItem()">OK</button>
-        <button class="btn btn-warning" ng-click="close()">Cancel</button>
+        <button class="btn" ng-disabled="addItemForm.$invalid" ng-click="addNewItem( true )">Add & Next</button>
+        <button class="btn" ng-disabled="addItemForm.$invalid" ng-click="addNewItem()">Save [{{items.length + 1}}]</button>
+        <button class="btn" ng-click="close()">Cancel</button>
     </div>
 </div>

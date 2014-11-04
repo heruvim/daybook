@@ -13,6 +13,7 @@ angular.module( "daybook" )
     $scope.creatingListItem = {};
     $scope.itemNames = [];
     $scope.autocomplete = {};
+    $scope.items = [];
 
     itemCompletionService.getItemNames( {}, function( names ) {
         $scope.itemNames = names;
@@ -26,9 +27,17 @@ angular.module( "daybook" )
         }
     } );
 
-    $scope.addNewItem = function() {
+    $scope.addNewItem = function( needNext ) {
         $scope.creatingListItem.name = angular.element( document.querySelector( '#name_value' ) ).val();
-        $modalInstance.close( $scope.creatingListItem );
+        $scope.items.push( $scope.creatingListItem );
+
+        if ( needNext ) {
+            $scope.creatingListItem = {};
+            angular.element( document.querySelector( '#name_value' ) ).val( "" );
+            $scope.addItemForm.$setPristine()
+        } else {
+            $modalInstance.close( $scope.items );
+        }
     }
 
     $scope.close = function() {

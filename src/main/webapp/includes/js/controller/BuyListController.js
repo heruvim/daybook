@@ -101,11 +101,13 @@ angular.module( "daybook" )
         var modalInstance = $modal.open({
             templateUrl: 'partials/modal/addOrderItem.html',
             controller: 'AddOrderController',
+            windowClass: 'add_new_item_window',
             size: size,
         });
 
         modalInstance.result.then( function( data ) {
-            $scope.addNewItem( data );
+            for ( var i = 0; i < data.length; i++ )
+                $scope.addNewItem( data[ i ] );
         }, function() {} );
     }
 } );

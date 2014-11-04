@@ -7,6 +7,7 @@ angular.module( "daybook")
     $scope.order = "name";
     $scope.reverse = false;
     $scope.addLabel = "Add";
+    $scope.alertMessage = "";
 
     itemCompletionService.getItemNames( {}, function( items ) {
         $scope.listItems = items;
