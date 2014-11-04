@@ -4,7 +4,7 @@ public class OrderItem
 {
     public OrderItem() {}
 
-    public OrderItem( int count,
+    public OrderItem( double count,
                       long itemId,
                       long orderId ) {
         this.count = count;
@@ -13,15 +13,15 @@ public class OrderItem
     }
 
     private long id;
-    private int count;
+    private double count;
     private long itemId;
     private long orderId;
 
     public long getId() { return id; }
     public void setId( long id ) { this.id = id; }
 
-    public int getCount() { return count; }
-    public void setCount( int count ) { this.count = count; }
+    public double getCount() { return count; }
+    public void setCount( double count ) { this.count = count; }
 
     public long getItemId() { return itemId; }
     public void setItemId( long itemId ) { this.itemId = itemId; }

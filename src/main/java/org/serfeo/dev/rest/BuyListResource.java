@@ -29,7 +29,7 @@ public class BuyListResource
     @Produces( MediaType.APPLICATION_JSON )
     public Order saveBuyList( BuyList buyList ) {
         List< BuyList.BuyListItem > buyListItems = buyList.getItems();
-        HashMap< String, Integer > nameToCountMap = new HashMap<>();
+        HashMap< String, Double > nameToCountMap = new HashMap<>();
 
         List< Item > items = new LinkedList<>();
         for ( BuyList.BuyListItem currentBuyListItem: buyListItems ) {
@@ -39,14 +39,12 @@ public class BuyListResource
             nameToCountMap.put( currentBuyListItem.getName(), currentBuyListItem.getCount() );
         }
 
-        int totalCount = 0;
-        float totalPrice = 0;
+        double totalPrice = 0.0d;
         for ( BuyList.BuyListItem item: buyList.getItems() ) {
-            totalCount += item.getCount();
             totalPrice += ( item.getCount() * item.getPrice() );
         }
 
-        Order newOrder = new Order( buyList.getDate(), totalPrice, totalCount);
+        Order newOrder = new Order( buyList.getDate(), totalPrice, buyList.getItems().size());
         orderMapperDAO.insertOrder( newOrder );
 
         orderMapperDAO.insertItems( items );

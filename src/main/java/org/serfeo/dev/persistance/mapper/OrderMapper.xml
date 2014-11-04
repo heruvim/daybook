@@ -40,7 +40,7 @@
 
     <insert id="insertItem" parameterType="Item">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
-            SELECT @@IDENTITY
+            SELECT `id` FROM `items` WHERE `name`=#{name}
         </selectKey>
         INSERT INTO `items`( `name`, `countName`, `price` )
             VALUES ( #{name}, #{countName}, #{price} )
@@ -53,7 +53,7 @@
     <delete id="deleteBuyListById">
         DELETE Orders, OrderItems FROM
             Orders
-        JOIN
+        LEFT JOIN
             OrderItems
         ON orders.id = OrderItems.orderId
         WHERE orders.id = #{id}

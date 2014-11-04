@@ -112,4 +112,14 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="04.11.2014-00.45" author="serfeo">
+        <comment>modify count column type in orderItems table</comment>
+        <sql>
+            alter table `orderItems` modify count float DEFAULT NULL;
+        </sql>
+        <rollback>
+            alter table `orderItems` modify count int(11) DEFAULT NULL;
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

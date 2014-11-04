@@ -31,15 +31,15 @@ public class BuyList
     {
         private String  name;
         private String  countName;
-        private Integer count;
-        private Float  price;
+        private Double count;
+        private Double  price;
 
         public BuyListItem() {}
 
         public BuyListItem( String name,
                             String countName,
-                            Integer count,
-                            Float price ) {
+                            Double count,
+                            Double price ) {
             this.name = name;
             this.countName = countName;
             this.count = count;
@@ -52,10 +52,10 @@ public class BuyList
         public String getCountName() { return countName; }
         public void setCountName( String countName ) { this.countName = countName; }
 
-        public Integer getCount() { return count; }
-        public void setCount( Integer count ) { this.count = count; }
+        public Double getCount() { return count; }
+        public void setCount( Double count ) { this.count = count; }
 
-        public Float getPrice() { return price; }
-        public void setPrice( Float price ) { this.price = price; }
+        public Double getPrice() { return price; }
+        public void setPrice( Double price ) { this.price = price; }
     }
 }
