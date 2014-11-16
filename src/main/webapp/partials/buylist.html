@@ -25,11 +25,11 @@
                     <td><span>{{ currentListItem.name }}</span></td>
                     <td><span style='float: right'>{{ currentListItem.count }}</span></td>
                     <td><span>{{ currentListItem.countName }}</span></td>
-                    <td><span>{{ currentListItem.price }}</span></td>
+                    <td><span>{{ currentListItem.price | currency }}</span></td>
                 </tr>
                 <tr>
                     <td colspan='4'><span style='float: right; padding: 0px 15px;'>Total:</span></td>
-                    <td>{{ getTotalPrice() }}</td>
+                    <td>{{ getTotalPrice() | currency }}</td>
                 </tr>
             </tbody>
         </table>
@@ -54,8 +54,8 @@
                             <span class='glyphicon glyphicon-eye-open'></span>
                         </button>
                     </td>
-                    <td><span>{{ getDateStringFromDate( prevBuyList.date ) }}</span></td>
-                    <td><span>{{ prevBuyList.totalPrice }}</span></td>
+                    <td><span>{{ prevBuyList.date | date: 'dd.MM.yyyy hh:mm' }}</span></td>
+                    <td><span>{{ prevBuyList.totalPrice | currency }}</span></td>
                     <td><span>{{ prevBuyList.totalCount }}</span></td>
                 </tr>
             </tbody>

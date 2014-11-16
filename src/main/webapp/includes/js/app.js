@@ -1,7 +1,6 @@
 var dayBookModule = angular.module( "daybook",
 [ "ngRoute",
   "ngResource",
-  "angucomplete",
   "ui.bootstrap" ] );
 
 dayBookModule.config( [ "$routeProvider", function( $routeProvider )

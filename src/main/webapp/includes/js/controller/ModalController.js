@@ -12,32 +12,26 @@ angular.module( "daybook" )
 .controller( "AddOrderController", function( $scope, $modalInstance, itemCompletionService ) {
     $scope.creatingListItem = {};
     $scope.itemNames = [];
-    $scope.autocomplete = {};
     $scope.items = [];
+    angular.element( document.querySelector( '#name' ) ).focus();
 
     itemCompletionService.getItemNames( {}, function( names ) {
         $scope.itemNames = names;
     }, function() { alert( "error!" ) } );
 
-    $scope.$watch( "autocomplete", function() {
-        if ( $scope.autocomplete && $scope.autocomplete.originalObject ) {
-            var originalObject = $scope.autocomplete.originalObject;
-            originalObject.id = undefined;
-            $scope.creatingListItem = originalObject;
-        }
-    } );
+
+    $scope.onItemSelected = function( item ) {
+        $scope.creatingListItem = item;
+    }
 
     $scope.addNewItem = function( needNext ) {
-        $scope.creatingListItem.name = angular.element( document.querySelector( '#name_value' ) ).val();
         $scope.items.push( $scope.creatingListItem );
+        $scope.creatingListItem = {};
+        $scope.addItemForm.$setPristine();
+    }
 
-        if ( needNext ) {
-            $scope.creatingListItem = {};
-            angular.element( document.querySelector( '#name_value' ) ).val( "" );
-            $scope.addItemForm.$setPristine()
-        } else {
-            $modalInstance.close( $scope.items );
-        }
+    $scope.saveAndClose = function() {
+        $modalInstance.close( $scope.items );
     }
 
     $scope.close = function() {

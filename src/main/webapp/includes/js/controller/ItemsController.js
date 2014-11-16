@@ -35,6 +35,8 @@ angular.module( "daybook")
                 $scope.addLabel = "Add";
             } );
         }
+
+        $scope.addItemForm.$setPristine()
     }
 
     $scope.editItem = function( item ) {

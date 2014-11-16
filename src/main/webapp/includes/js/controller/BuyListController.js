@@ -85,18 +85,6 @@ angular.module( "daybook" )
         function() { alert( "error" ) } );
     }
 
-    $scope.getDateStringFromDate = function( date ) {
-        var date = new Date( date );
-        var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-        var month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth();
-        var year = date.getFullYear() + "";
-
-        var dateString = "dd.mm.yy".replace( "dd", day )
-                                   .replace( "mm", month )
-                                   .replace( "yy", year );
-        return dateString;
-    }
-
     $scope.open = function (size) {
         var modalInstance = $modal.open({
             templateUrl: 'partials/modal/addOrderItem.html',

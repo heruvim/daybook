@@ -55,3 +55,15 @@ input.filter {
 .add_new_item_window .modal-content{
     width: 450px !important;
 }
+
+.inline {
+    display: inline-block;
+}
+
+.save_panel {
+    float: right;
+}
+
+.save_panel span {
+    margin: 0 10px;
+}

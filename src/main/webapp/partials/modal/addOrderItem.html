@@ -1,6 +1,10 @@
 <div>
     <div class="modal-header">
-        <h3 class="modal-title">Add Item</h3>
+        <h3 class="modal-title inline">Add Item</h3>
+        <div class="inline save_panel">
+            <span>Total items: {{items.length}}</span>
+            <button class="btn" ng-click="saveAndClose()">Save</button>
+        </div>
     </div>
     <div class="modal-body">
         <form class="form-horizontal" role="form" name="addItemForm">
@@ -21,18 +25,11 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Name</label>
+                <label for="name" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
-                    <angucomplete id="name"
-                                  pause="100"
-                                  placeholder="name"
-                                  selectedobject="autocomplete"
-                                  searchfields="name"
-                                  titlefield="name"
-                                  minlength=1
-                                  localdata="itemNames"
-                                  inputclass="form-control form-control-small"
-                                  name="name"/>
+                    <input type="text" ng-model="creatingListItem.name" id="name" placeholder="Name" class="form-control"
+                           typeahead="itemName.name for itemName in itemNames | filter:$viewValue | limitTo:20"
+                           typeahead-on-select="onItemSelected($item)">
                 </div>
             </div>
             <div class="form-group">
@@ -54,8 +51,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn" ng-disabled="addItemForm.$invalid" ng-click="addNewItem( true )">Add & Next</button>
-        <button class="btn" ng-disabled="addItemForm.$invalid" ng-click="addNewItem()">Save [{{items.length + 1}}]</button>
-        <button class="btn" ng-click="close()">Cancel</button>
+        <button class="btn" ng-disabled="addItemForm.$invalid" ng-click="addNewItem()">Add Next</button>
+        <button class="btn" ng-click="close()">Close Without Saving</button>
     </div>
 </div>
