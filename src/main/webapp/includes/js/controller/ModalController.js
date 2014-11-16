@@ -9,11 +9,14 @@ angular.module( "daybook" )
         $modalInstance.dismiss();
     }
 } )
-.controller( "AddOrderController", function( $scope, $modalInstance, itemCompletionService ) {
+.controller( "AddOrderController", function( $scope, $modalInstance, $timeout, itemCompletionService ) {
     $scope.creatingListItem = {};
     $scope.itemNames = [];
     $scope.items = [];
-    angular.element( document.querySelector( '#name' ) ).focus();
+
+    $timeout( function() {
+        $scope.isInputFocused = true;
+    }, 100 );
 
     itemCompletionService.getItemNames( {}, function( names ) {
         $scope.itemNames = names;
@@ -24,10 +27,20 @@ angular.module( "daybook" )
         $scope.creatingListItem = item;
     }
 
-    $scope.addNewItem = function( needNext ) {
+    $scope.addNewItem = function() {
         $scope.items.push( $scope.creatingListItem );
+
+        for ( var i = 0; i < $scope.itemNames.length; i++ ) {
+            if ( $scope.itemNames[ i ].id === $scope.creatingListItem.id ) {
+                $scope.itemNames.splice( i, 1 );
+                break;
+            }
+        }
+
         $scope.creatingListItem = {};
         $scope.addItemForm.$setPristine();
+
+        $scope.isInputFocused = true;
     }
 
     $scope.saveAndClose = function() {
