@@ -5,6 +5,20 @@ angular.module( "daybook" )
               buyListService,
               browseBuyListService,
               itemCompletionService ) {
+
+    // private functions
+    var showConfirm = function( message, onSuccess, onCancel ) {
+        var modalInstance = $modal.open({
+            templateUrl: 'includes/js/views/modal/confirm.html',
+            controller: 'ConfirmController',
+            size: "sm",
+            resolve: { message: function() { return message; } }
+        });
+
+        modalInstance.result.then( onSuccess, onCancel );
+    }
+    // end private functions
+
     $scope.currentListItems = [];
     $scope.creatingListItem = {};
     $scope.prevBuyLists = [];
@@ -57,12 +71,14 @@ angular.module( "daybook" )
     }
 
     $scope.deleteListItem = function( item ) {
-        for ( var i = 0; i < $scope.currentListItems.length; i++ ) {
-            if ( $scope.currentListItems[ i ].name === item.name ) {
-                $scope.currentListItems.splice( i, 1 );
-                return;
+        showConfirm( "Do you really want to delete this item?", function() {
+            for ( var i = 0; i < $scope.currentListItems.length; i++ ) {
+                if ( $scope.currentListItems[ i ].name === item.name ) {
+                    $scope.currentListItems.splice( i, 1 );
+                    return;
+                }
             }
-        }
+        } );
     }
 
     $scope.getBuyListById = function( id ) {
@@ -73,21 +89,23 @@ angular.module( "daybook" )
     }
 
     $scope.deleteBuyList = function( buyList ) {
-        buyListService.delBuyList( { id: buyList.id },
-        function() {
-            for ( var i = 0; i < $scope.prevBuyLists.length; i++ ) {
-                if ( $scope.prevBuyLists[ i ].id === buyList.id ) {
-                    $scope.prevBuyLists.splice( i, 1 );
-                    $scope.currentListItems = [];
-                    break;
-                }
-            } },
-        function() { alert( "error" ) } );
+        showConfirm( "Do you really want to delete this buy-list?", function() {
+            buyListService.delBuyList( { id: buyList.id },
+            function() {
+                for ( var i = 0; i < $scope.prevBuyLists.length; i++ ) {
+                    if ( $scope.prevBuyLists[ i ].id === buyList.id ) {
+                        $scope.prevBuyLists.splice( i, 1 );
+                        $scope.currentListItems = [];
+                        break;
+                    }
+                } },
+            function() { alert( "error" ) } );
+        } );
     }
 
     $scope.open = function (size) {
         var modalInstance = $modal.open({
-            templateUrl: 'partials/modal/addOrderItem.html',
+            templateUrl: 'includes/js/views/modal/addOrderItem.html',
             controller: 'AddOrderController',
             windowClass: 'add_new_item_window',
             size: size,

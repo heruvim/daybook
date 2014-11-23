@@ -1,7 +1,18 @@
 angular.module( "daybook")
-.controller( "ItemsController", function ( $scope,
-                                           $modal,
-                                           itemCompletionService ) {
+.controller( "ItemsController", function ( $scope, $modal, itemCompletionService ) {
+    // private function
+    var showConfirm = function( message, onSuccess, onCancel ) {
+        var modalInstance = $modal.open({
+            templateUrl: 'includes/js/views/modal/confirm.html',
+            controller: 'ConfirmController',
+            size: "sm",
+            resolve: { message: function() { return message; } }
+        });
+
+        modalInstance.result.then( onSuccess, onCancel );
+    }
+    // end private function
+
     $scope.listItems = [];
     $scope.item = {};
     $scope.order = "name";
@@ -45,13 +56,15 @@ angular.module( "daybook")
     }
 
     $scope.deleteItem = function( item ) {
-        itemCompletionService.deleteItem( { id: item.id }, function() {
-        for ( var i = 0; i < $scope.listItems.length; i++ ) {
-            if ( $scope.listItems[ i ].id === item.id ) {
-                $scope.listItems.splice( i, 1 );
-                return;
-            }
-        } }, function() { alert( "error" ); } );
+        showConfirm( "Do you really want to delete this item", function() {
+            itemCompletionService.deleteItem( { id: item.id }, function() {
+            for ( var i = 0; i < $scope.listItems.length; i++ ) {
+                if ( $scope.listItems[ i ].id === item.id ) {
+                    $scope.listItems.splice( i, 1 );
+                    return;
+                }
+            } }, function() { alert( "error" ); } );
+        } );
     }
 
     $scope.changeOrder = function( property ) {

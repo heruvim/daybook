@@ -1,5 +1,7 @@
 package org.serfeo.dev.persistance.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import java.util.List;
 
 public class BuyList
@@ -27,11 +29,12 @@ public class BuyList
     public List< BuyListItem > getItems() { return items; }
     public void setItems( List< BuyListItem > items ) { this.items = items; }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class BuyListItem
     {
         private String  name;
         private String  countName;
-        private Double count;
+        private Double  count;
         private Double  price;
 
         public BuyListItem() {}

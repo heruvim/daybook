@@ -3,7 +3,7 @@
         <button class='btn btn-default' ng-click='open()'>
             <span class="glyphicon glyphicon-plus">Add</span>
         </button>
-        <button class='btn btn-default' ng-click='saveBuyList()'>
+        <button class='btn btn-default' ng-click='saveBuyList()' ng-disabled='!currentListItems.length'>
             <span class="glyphicon glyphicon-check">Complete</span>
         </button>
 

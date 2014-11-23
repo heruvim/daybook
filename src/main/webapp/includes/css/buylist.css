@@ -67,3 +67,9 @@ input.filter {
 .save_panel span {
     margin: 0 10px;
 }
+
+.confirm-window .modal-footer {
+    margin-top: 0px !important;
+    border-top: none !important;
+    padding: 0px 20px 20px 0px !important;
+}

@@ -7,19 +7,19 @@ dayBookModule.config( [ "$routeProvider", function( $routeProvider )
 {
     $routeProvider.when( "/calendar",
     {
-        templateUrl: "partials/calendar.html",
+        templateUrl: "includes/js/views/calendar.html",
         controller: "CalendarController"
     } ).when( "/buylist",
     {
-        templateUrl: "partials/buylist.html",
+        templateUrl: "includes/js/views//buylist.html",
         controller: "BuyListController"
     } ).when( "/",
     {
-        templateUrl: "partials/index.html",
+        templateUrl: "includes/js/views//index.html",
         controller: "MainPageController"
     } ).when( "/items",
    {
-       templateUrl: "partials/items.html",
+       templateUrl: "includes/js/views//items.html",
        controller: "ItemsController"
    } );
 } ] );

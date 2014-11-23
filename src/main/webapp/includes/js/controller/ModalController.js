@@ -50,4 +50,15 @@ angular.module( "daybook" )
     $scope.close = function() {
         $modalInstance.dismiss();
     }
+} )
+.controller( "ConfirmController", function( $scope, $modalInstance, message ) {
+    $scope.message = message;
+
+    $scope.confirm = function() {
+        $modalInstance.close();
+    }
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss();
+    }
 } );
