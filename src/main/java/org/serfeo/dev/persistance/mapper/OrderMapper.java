@@ -10,7 +10,7 @@ import org.serfeo.dev.persistance.domain.OrderItem;
 import java.util.List;
 
 public interface OrderMapper {
-    @Select( "select * from orders" )
+    @Select( "select * from `orders` where `isDeleted`=0" )
     public List< Order > getAllOrders();
 
     @Select( "select * from items" )

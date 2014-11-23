@@ -122,4 +122,14 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="23.11.2014-18:00" author="serfeo">
+        <comment>add isDeleted column in orders table</comment>
+        <sql>
+            alter table `orders` add column `isDeleted` tinyint(1) DEFAULT 0
+        </sql>
+        <rollback>
+            alter table `orders` drop column `isDeleted`
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

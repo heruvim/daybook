@@ -51,12 +51,14 @@
     </insert>
 
     <delete id="deleteBuyListById">
-        DELETE Orders, OrderItems FROM
+        <!--DELETE Orders, OrderItems FROM
             Orders
         LEFT JOIN
             OrderItems
         ON orders.id = OrderItems.orderId
-        WHERE orders.id = #{id}
+        WHERE orders.id = #{id}-->
+        <!-- don't delete data -->
+        UPDATE `Orders` SET `isDeleted`=1 WHERE `orders`.`id` = #{id}
     </delete>
 
     <delete id="deleteItemById">
