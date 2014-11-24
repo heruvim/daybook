@@ -132,4 +132,28 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="24.11.2014-15:15" author="serfeo">
+        <comment>drop password column from users table and add salt and verifier columns</comment>
+        <sql>
+            alter table `users` drop column `password`;
+            alter table `users` add column `salt` binary(20) NOT NULL;
+            alter table `users` add column `verifier` binary(20) NOT NULL;
+        </sql>
+        <rollback>
+            alter table `users` add column `password` varchar(50);
+            alter table `users` drop column `salt`;
+            alter table `users` drop column `verifier`;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="24.11.2014-15:25" author="serfeo">
+        <comment>add unique key for login in users table</comment>
+        <sql>
+            alter table `users` add UNIQUE `login_uniq`(`login`);
+        </sql>
+        <rollback>
+            alter table `users` drop key `login_uniq`;
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

@@ -13,6 +13,9 @@
   <!-- quint -->
   <script src='includes/lib/qunit/qunit-1.14.0.js'></script>
 
+  <!-- sha1 -->
+  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+
   <!-- bootstrap -->
   <link rel="stylesheet" type="text/css" href="includes/lib/bootstrap/css/bootstrap.css">
 
@@ -22,6 +25,7 @@
   <!-- services -->
   <script src='includes/js/services/CalendarService.js'></script>
   <script src='includes/js/services/BuyListService.js'></script>
+  <script src="includes/js/services/UserService.js"></script>
 
   <!-- controllers -->
   <script src='includes/js/controller/CalendarController.js'></script>
@@ -36,7 +40,7 @@
   <link rel="stylesheet" type="text/css" href="includes/css/calendar.css">
   <link rel="stylesheet" type="text/css" href="includes/css/buylist.css">
 </head>
-<body>
+<body ng-controller="MainPageController">
     <div class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
@@ -47,10 +51,11 @@
 
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Login">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input ng-model="credentials.login" type="text" class="form-control" placeholder="Login">
+                    <input ng-model="credentials.password" type="password" class="form-control" placeholder="Password">
                 </div>
-                <button type="submit" class="btn btn-default">Sign in</button>
+                <button class="btn btn-default" ng-click="logIn()">Log in</button>
+                <button class="btn btn-default" ng-click="signIn()">Sign in</button>
             </form>
         </div>
     </div>

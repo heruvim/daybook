@@ -61,4 +61,30 @@ angular.module( "daybook" )
     $scope.cancel = function() {
         $modalInstance.dismiss();
     }
-} );
+} )
+.controller( "RegistrationController", function( $scope, $modalInstance, registrationService ) {
+    $scope.newUser = {};
+
+    $scope.register = function() {
+        var newUser = {};
+        newUser.login = $scope.newUser.login;
+        newUser.nickname = $scope.newUser.nickname;
+
+        var password = CryptoJS.SHA1( $scope.newUser.password );
+        for ( var bytes = [], b = 0; b < password.words.length * 32; b += 8 )
+            bytes.push( ( password.words[ b >>> 5 ] >>> ( 24 - b % 32 ) ) & 0xFF );
+
+        newUser.verifier = bytes;
+
+        registrationService.save( newUser,
+            function() {
+                $modalInstance.dismiss();
+            },
+            function() { alert( "Error" ); }
+        )
+    }
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss();
+    }
+});

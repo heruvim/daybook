@@ -46,4 +46,19 @@ public class CommonResponse
 
         return commonResponse;
     }
+
+    public static CommonResponse error() {
+        return error( null );
+    }
+
+    public static CommonResponse error( Param[] params )
+    {
+        CommonResponse commonResponse = new CommonResponse();
+        commonResponse.setStatus( "error" );
+
+        if ( params != null )
+            commonResponse.setParams( params );
+
+        return commonResponse;
+    }
 }

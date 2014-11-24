@@ -5,13 +5,10 @@ import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.guice.MyBatisModule;
 import org.mybatis.guice.datasource.builtin.PooledDataSourceProvider;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
-import org.serfeo.dev.persistance.domain.CalendarEvent;
-import org.serfeo.dev.persistance.domain.Item;
-import org.serfeo.dev.persistance.domain.Order;
-import org.serfeo.dev.persistance.domain.OrderItem;
+import org.serfeo.dev.persistance.domain.*;
 import org.serfeo.dev.persistance.mapper.EventMapper;
 import org.serfeo.dev.persistance.mapper.OrderMapper;
-import org.serfeo.dev.persistance.domain.BuyList;
+import org.serfeo.dev.persistance.mapper.UserMapper;
 
 public class PersistenceModule extends MyBatisModule {
     public static final String JDBC_SCHEMA   = "JDBC.schema";
@@ -32,6 +29,7 @@ public class PersistenceModule extends MyBatisModule {
         //mappers
         addMapperClass(EventMapper.class);
         addMapperClass(OrderMapper.class);
+        addMapperClass(UserMapper.class);
 
         //aliases
         addSimpleAlias(CalendarEvent.class);
@@ -40,5 +38,6 @@ public class PersistenceModule extends MyBatisModule {
         addSimpleAlias(Item.class);
         addSimpleAlias(BuyList.class);
         addSimpleAlias(BuyList.BuyListItem.class);
+        addSimpleAlias(User.class);
     }
 }
