@@ -71,4 +71,8 @@ angular.module( "daybook")
         $scope.order = property;
         $scope.reverse = !$scope.reverse;
     }
+
+    $scope.hasRequiredError = function( controlName ) {
+        return $scope.addItemForm[ controlName ].$dirty && $scope.addItemForm[ controlName ].$error.required
+    }
 } );

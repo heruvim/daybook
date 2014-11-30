@@ -73,3 +73,12 @@ input.filter {
     border-top: none !important;
     padding: 0px 20px 20px 0px !important;
 }
+
+.form_tooltip {
+    height: 15px;
+}
+
+.form_tooltip span {
+    padding: 2px 10px;
+    color: #a94442;
+}

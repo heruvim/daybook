@@ -24,4 +24,26 @@ angular.module( "daybook" )
             } );
         }
     }
+} )
+.directive( "dbConfirm", function() {
+    return {
+        restrict: "A",
+        scope: { dbConfirm: "=" },
+        require: "ngModel",
+        link: function( $scope, element, attrs, ngModel ) {
+            var isValid = function( value ) {
+                return value === $scope.dbConfirm;
+            }
+
+            ngModel.$parsers.unshift( function ( viewValue ) {
+                ngModel.$setValidity( 'confirm', isValid( viewValue ) );
+                return viewValue;
+            } );
+
+            ngModel.$formatters.unshift( function ( modelValue ) {
+                ngModel.$setValidity( 'confirm', isValid( modelValue ) );
+                return modelValue;
+            } );
+        }
+    }
 } );

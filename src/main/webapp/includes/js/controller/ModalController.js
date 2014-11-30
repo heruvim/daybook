@@ -43,6 +43,10 @@ angular.module( "daybook" )
         $scope.isInputFocused = true;
     }
 
+    $scope.hasRequiredError = function( controlName ) {
+        return $scope.addItemForm[ controlName ].$dirty && $scope.addItemForm[ controlName ].$error.required
+    }
+
     $scope.saveAndClose = function() {
         $modalInstance.close( $scope.items );
     }
@@ -84,7 +88,15 @@ angular.module( "daybook" )
         )
     }
 
-    $scope.cancel = function() {
+    $scope.close = function() {
         $modalInstance.dismiss();
+    }
+
+    $scope.hasRequiredError = function( controlName ) {
+        return $scope.newUserForm[ controlName ].$dirty && $scope.newUserForm[ controlName ].$error.required
+    }
+
+    $scope.hasConfirmError = function() {
+        return $scope.newUserForm.confirm.$dirty && $scope.newUserForm.confirm.$error.confirm;
     }
 });
