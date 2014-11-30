@@ -9,14 +9,23 @@
 
         <table class='table'>
             <tbody>
-                <tr>
+                <tr class="header">
                     <th class='button_column'></th>
-                    <th>Name</th>
-                    <th style='width:30px'>Count</th>
+                    <th>
+                        <span ng-click="changeOrder( 'name' )">Name</span>
+                    </th>
+                    <th style='width:30px'>
+                        <span ng-click="changeOrder( 'count' )">Count</span>
+                    </th>
                     <th style='width:30px'></th>
-                    <th style='width:50px'>Price</th>
+                    <th style='width:50px'>
+                        <span ng-click="changeOrder( 'price' )">Price</span>
+                    </th>
+                    <th style='width:100px'>
+                        <span ng-click="changeOrder( 'comment' )">Comment</span>
+                    </th>
                 </tr>
-                <tr ng-repeat='currentListItem in currentListItems'>
+                <tr ng-repeat='currentListItem in currentListItems | orderBy:order:reverse'>
                     <td>
                         <button ng-click="deleteListItem( currentListItem )" class='btn btn-default btn-xs'>
                             <span class='glyphicon glyphicon-minus'></span>
@@ -26,10 +35,12 @@
                     <td><span style='float: right'>{{ currentListItem.count }}</span></td>
                     <td><span>{{ currentListItem.countName }}</span></td>
                     <td><span>{{ currentListItem.price | currency }}</span></td>
+                    <td><span>{{ currentListItem.comment }}</span></td>
                 </tr>
                 <tr>
                     <td colspan='4'><span style='float: right; padding: 0px 15px;'>Total:</span></td>
                     <td>{{ getTotalPrice() | currency }}</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>

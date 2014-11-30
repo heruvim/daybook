@@ -22,6 +22,8 @@ angular.module( "daybook" )
     $scope.currentListItems = [];
     $scope.creatingListItem = {};
     $scope.prevBuyLists = [];
+    $scope.order = "";
+    $scope.reverse = false;
 
     browseBuyListService.getAllListInformation( {}, function( data ) {
         if ( data )
@@ -115,5 +117,10 @@ angular.module( "daybook" )
             for ( var i = 0; i < data.length; i++ )
                 $scope.addNewItem( data[ i ] );
         }, function() {} );
+    }
+
+    $scope.changeOrder = function( property ) {
+        $scope.order = property;
+        $scope.reverse = !$scope.reverse;
     }
 } );

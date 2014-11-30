@@ -11,6 +11,7 @@
             <result property="countName" column="countName"/>
             <result property="count" column="count"/>
             <result property="price" column="price"/>
+            <result property="comment" column="comment"/>
         </collection>
     </resultMap>
 
@@ -21,7 +22,7 @@
             ( select orderId, itemId, count from OrderItems where orderId=#{id} ) oi
             ON orders.buyListId = oi.orderId
         LEFT JOIN
-            ( select id, name, countName, price from Items ) it
+            ( select id, name, countName, price, comment from Items ) it
         ON oi.itemId = it.id
     </select>
 
@@ -42,12 +43,13 @@
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT `id` FROM `items` WHERE `name`=#{name}
         </selectKey>
-        INSERT INTO `items`( `name`, `countName`, `price` )
-            VALUES ( #{name}, #{countName}, #{price} )
+        INSERT INTO `items`( `name`, `countName`, `price`, `comment` )
+            VALUES ( #{name}, #{countName}, #{price}, #{comment} )
         ON DUPLICATE KEY UPDATE
-            name=#{name},
-            countName=#{countName},
-            price=#{price}
+            `name`=#{name},
+            `countName`=#{countName},
+            `price`=#{price},
+            `comment`=#{comment}
     </insert>
 
     <delete id="deleteBuyListById">
@@ -72,7 +74,7 @@
 
     <update id="updateItem" parameterType="Item">
         UPDATE Items
-        SET name=#{name}, countName=#{countName}, price=#{price}
+        SET `name`=#{name}, `countName`=#{countName}, `price`=#{price}, `comment`=#{comment}
         WHERE id=#{id}
     </update>
 </mapper>

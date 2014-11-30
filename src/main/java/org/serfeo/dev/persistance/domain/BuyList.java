@@ -30,23 +30,25 @@ public class BuyList
     public void setItems( List< BuyListItem > items ) { this.items = items; }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class BuyListItem
-    {
-        private String  name;
-        private String  countName;
-        private Double  count;
-        private Double  price;
+    public static class BuyListItem {
+        private String name;
+        private String countName;
+        private Double count;
+        private Double price;
+        private String comment;
 
         public BuyListItem() {}
 
         public BuyListItem( String name,
                             String countName,
                             Double count,
-                            Double price ) {
+                            Double price,
+                            String comment ) {
             this.name = name;
             this.countName = countName;
             this.count = count;
             this.price = price;
+            this.comment = comment;
         }
 
         public String getName() { return name; }
@@ -60,5 +62,8 @@ public class BuyList
 
         public Double getPrice() { return price; }
         public void setPrice( Double price ) { this.price = price; }
+
+        public String getComment() { return comment; }
+        public void setComment( String comment ) { this.comment = comment; }
     }
 }

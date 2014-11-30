@@ -156,4 +156,14 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="30.11.2014-12:00" author="serfeo">
+        <comment>add comment field in items table</comment>
+        <sql>
+            alter table `items` add column `comment` varchar(50);
+        </sql>
+        <rollback>
+            alter table `items` drop column `comment`;
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
