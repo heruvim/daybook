@@ -35,7 +35,8 @@ public class BuyListResource
         for ( BuyList.BuyListItem currentBuyListItem: buyListItems ) {
             items.add( new Item( currentBuyListItem.getName(),
                                  currentBuyListItem.getCountName(),
-                                 currentBuyListItem.getPrice() ) );
+                                 currentBuyListItem.getPrice(),
+                                 currentBuyListItem.getComment() ) );
             nameToCountMap.put( currentBuyListItem.getName(), currentBuyListItem.getCount() );
         }
 
