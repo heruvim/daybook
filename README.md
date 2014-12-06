@@ -22,4 +22,8 @@ Getting Started
   - add new user "daybook" with password "daybook" ( values can be changed in PersistanceModule.java )
   - add new database "daybook" ( value can be changed in PersistanceModule.java )
   - grant privilegies for new database to new user
-- Run "mvn tomcat7:run" 
+
+- Install NodeJS 0.1+ and npm
+- Run "npm install"
+- Run "grunt resolve"
+- Run "mvn tomcat7:run"

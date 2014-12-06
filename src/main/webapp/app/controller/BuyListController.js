@@ -9,7 +9,7 @@ angular.module( "daybook" )
     // private functions
     var showConfirm = function( message, onSuccess, onCancel ) {
         var modalInstance = $modal.open({
-            templateUrl: 'includes/js/views/modal/confirm.html',
+            templateUrl: 'app/views/modal/confirm.html',
             controller: 'ConfirmController',
             size: "sm",
             resolve: { message: function() { return message; } }
@@ -107,7 +107,7 @@ angular.module( "daybook" )
 
     $scope.open = function (size) {
         var modalInstance = $modal.open({
-            templateUrl: 'includes/js/views/modal/addOrderItem.html',
+            templateUrl: 'app/views/modal/addOrderItem.html',
             controller: 'AddOrderController',
             windowClass: 'add_new_item_window',
             size: size,

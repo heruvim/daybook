@@ -3,50 +3,50 @@
 <head>
   <title>Angular example</title>
   <!--angular modules-->
-  <script src='includes/lib/angular/angular.js'></script>
-  <script src='includes/lib/angular/angular-resource.js'></script>
-  <script src='includes/lib/angular/angular-route.js'></script>
+  <script src='lib/angular/angular.js'></script>
+  <script src='lib/angular-resource/angular-resource.js'></script>
+  <script src='lib/angular-bootstrap/ui-bootstrap-tpls.js'></script>
 
   <!--angular ui -->
-  <script src='includes/lib/angular-ui/ui-bootstrap-tpls-0.11.2.js'></script>
+  <script src='lib/angular-ui-router/angular-ui-router.js'></script>
 
   <!-- quint -->
-  <script src='includes/lib/qunit/qunit-1.14.0.js'></script>
+  <script src='lib/qunit/qunit.js'></script>
 
   <!-- sha1 -->
   <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
 
   <!-- bootstrap -->
-  <link rel="stylesheet" type="text/css" href="includes/lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-css-only/css/bootstrap.css">
 
   <!-- daybook source -->
-  <script src='includes/js/app.js'></script>
+  <script src='app/app.js'></script>
 
   <!-- services -->
-  <script src='includes/js/services/CalendarService.js'></script>
-  <script src='includes/js/services/BuyListService.js'></script>
-  <script src="includes/js/services/UserService.js"></script>
+  <script src='app/services/CalendarService.js'></script>
+  <script src='app/services/BuyListService.js'></script>
+  <script src="app/services/UserService.js"></script>
 
   <!-- controllers -->
-  <script src='includes/js/controller/CalendarController.js'></script>
-  <script src='includes/js/controller/MainPageController.js'></script>
-  <script src='includes/js/controller/BuyListController.js'></script>
-  <script src='includes/js/controller/ItemsController.js'></script>
-  <script src='includes/js/controller/ModalController.js'></script>
+  <script src='app/controller/CalendarController.js'></script>
+  <script src='app/controller/MainPageController.js'></script>
+  <script src='app/controller/BuyListController.js'></script>
+  <script src='app/controller/ItemsController.js'></script>
+  <script src='app/controller/ModalController.js'></script>
 
   <!-- directives -->
-  <script src='includes/js/directives/common.directives.js'></script>
+  <script src='app/directives/common.directives.js'></script>
 
-  <link rel="stylesheet" type="text/css" href="includes/css/calendar.css">
-  <link rel="stylesheet" type="text/css" href="includes/css/buylist.css">
+  <link rel="stylesheet" type="text/css" href="css/calendar.css">
+  <link rel="stylesheet" type="text/css" href="css/buylist.css">
 </head>
 <body ng-controller="MainPageController">
     <div class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <!--<li><a href='#/calendar'>Calendar</a></li>-->
-                <li><a href='#/buylist'>BuyList</a></li>
-                <li><a href='#/items'>Items</a></li>
+                <li><a ui-sref='buylist'>BuyList</a></li>
+                <li><a ui-sref='items'>Items</a></li>
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
@@ -61,7 +61,7 @@
             </form>
         </div>
     </div>
-    <div class="container-fluid" ng-view></div>
+    <div class="container-fluid" ui-view></div>
     <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
         <div class="container-fluid">
             <p class="navbar-text">M&M Inc. All rights reserved.</p>

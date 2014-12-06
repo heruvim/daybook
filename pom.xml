@@ -96,7 +96,7 @@
             </resource>
             <resource>
                 <filtering>true</filtering>
-                <directory>src/main/resources/hibernate</directory>
+                <directory>src/main/web/build</directory>
             </resource>
             <resource>
                 <filtering>false</filtering>
@@ -114,6 +114,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -144,6 +145,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 

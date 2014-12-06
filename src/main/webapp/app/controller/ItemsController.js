@@ -3,7 +3,7 @@ angular.module( "daybook")
     // private function
     var showConfirm = function( message, onSuccess, onCancel ) {
         var modalInstance = $modal.open({
-            templateUrl: 'includes/js/views/modal/confirm.html',
+            templateUrl: 'app/views/modal/confirm.html',
             controller: 'ConfirmController',
             size: "sm",
             resolve: { message: function() { return message; } }

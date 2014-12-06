@@ -19,7 +19,7 @@ angular.module( "daybook" )
 
     $scope.signIn = function() {
         var modalInstance = $modal.open({
-             templateUrl: 'includes/js/views/modal/registration.html',
+             templateUrl: 'app/views/modal/registration.html',
              controller: 'RegistrationController',
              size: "m"
         } );

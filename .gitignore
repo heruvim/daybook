@@ -1,3 +1,17 @@
+# maven build
 target
+
+# idea 
 *.iml
 .idea
+
+# node modules for grunt
+node_modules
+
+# bower modules
+bower_components
+
+# grunt bower task lib folder
+lib
+
+
