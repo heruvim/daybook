@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html ng-app="daybook">
 <head>
-  <title>Angular example</title>
-  <!--angular modules-->
-  <script src='lib/angular/angular.js'></script>
-  <script src='lib/angular-resource/angular-resource.js'></script>
-  <script src='lib/angular-bootstrap/ui-bootstrap-tpls.js'></script>
+    <title>Angular example</title>
+    <!--angular modules-->
+    <script src='lib/angular/angular.js'></script>
+    <script src='lib/angular-resource/angular-resource.js'></script>
+    <script src='lib/angular-bootstrap/ui-bootstrap-tpls.js'></script>
 
-  <!--angular ui -->
-  <script src='lib/angular-ui-router/angular-ui-router.js'></script>
+    <!--angular ui -->
+    <script src='lib/angular-ui-router/angular-ui-router.js'></script>
 
-  <!-- quint -->
-  <script src='lib/qunit/qunit.js'></script>
+    <!-- quint -->
+    <script src='lib/qunit/qunit.js'></script>
 
-  <!-- sha1 -->
-  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+    <!-- sha1 -->
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
 
-  <!-- bootstrap -->
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap-css-only/css/bootstrap.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-css-only/css/bootstrap.css">
 
-  <!-- daybook source -->
-  <script src='app/app.js'></script>
+    <!-- daybook source -->
+    <script src='app/app.js'></script>
 
-  <!-- services -->
-  <script src='app/services/CalendarService.js'></script>
-  <script src='app/services/BuyListService.js'></script>
-  <script src="app/services/UserService.js"></script>
+    <!-- services -->
+    <script src='app/services/CalendarService.js'></script>
+    <script src='app/services/BuyListService.js'></script>
+    <script src='app/services/UserService.js'></script>
+    <script src='app/services/AuthSessionService.js'></script>
 
-  <!-- controllers -->
-  <script src='app/controller/CalendarController.js'></script>
-  <script src='app/controller/MainPageController.js'></script>
-  <script src='app/controller/BuyListController.js'></script>
-  <script src='app/controller/ItemsController.js'></script>
-  <script src='app/controller/ModalController.js'></script>
+    <!-- controllers -->
+    <script src='app/controller/CalendarController.js'></script>
+    <script src='app/controller/MainPageController.js'></script>
+    <script src='app/controller/BuyListController.js'></script>
+    <script src='app/controller/ItemsController.js'></script>
+    <script src='app/controller/ModalController.js'></script>
 
-  <!-- directives -->
-  <script src='app/directives/common.directives.js'></script>
+    <!-- directives -->
+    <script src='app/directives/common.directives.js'></script>
 
-  <link rel="stylesheet" type="text/css" href="css/calendar.css">
-  <link rel="stylesheet" type="text/css" href="css/buylist.css">
+    <link rel="stylesheet" type="text/css" href="css/calendar.css">
+    <link rel="stylesheet" type="text/css" href="css/buylist.css">
 </head>
 <body ng-controller="MainPageController">
     <div class="navbar navbar-default" role="navigation">

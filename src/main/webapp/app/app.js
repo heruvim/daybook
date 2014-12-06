@@ -5,7 +5,7 @@ dayBookModule.config( function( $stateProvider, $urlRouterProvider ) {
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-        .state( 'index', {
+        .state( 'main', {
             url: '/',
             templateUrl: 'app/views/index.html',
             controller: 'MainPageController'
@@ -27,8 +27,16 @@ dayBookModule.config( function( $stateProvider, $urlRouterProvider ) {
         });
 } )
 
-.run( function( $rootScope, $state, $stateParams ) {
+.run( function( $rootScope, $state, $stateParams, AuthSession ) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-} )
+
+    $rootScope.$on( '$stateChangeStart',
+        function( event, toState, toParams, fromState, fromParams ){
+            if ( !AuthSession.isLoggedIn() && toState.name !== "main" ) {
+                event.preventDefault();
+                $state.transitionTo( "main" );
+            }
+        } );
+} );
 

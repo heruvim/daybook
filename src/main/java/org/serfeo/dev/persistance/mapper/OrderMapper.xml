@@ -17,12 +17,12 @@
 
     <select id="getBuyListById" resultMap="BuyListMapper">
         select * from
-            ( select id as buyListId, date from orders where id=#{id} ) orders
+            ( select id as buyListId, date from orders where id=#{id} and userId=#{userId} ) orders
         LEFT JOIN
             ( select orderId, itemId, count from OrderItems where orderId=#{id} ) oi
             ON orders.buyListId = oi.orderId
         LEFT JOIN
-            ( select id, name, countName, price, comment from Items ) it
+            ( select id, name, countName, price, comment from Items where userId=#{userId} ) it
         ON oi.itemId = it.id
     </select>
 
@@ -31,25 +31,26 @@
         VALUES ( #{count}, #{itemId}, #{orderId} )
     </insert>
 
-    <insert id="insertOrderData" parameterType="Order">
-        <selectKey resultType="long" keyProperty="id" order="AFTER">
-            SELECT @@IDENTITY
+    <insert id="insertOrderData">
+        <selectKey resultType="long" keyProperty="order.id" order="AFTER">
+            SELECT `id` FROM `orders` WHERE `date`=#{order.date} AND `userId`=#{userId}
         </selectKey>
-        INSERT INTO `orders`( `date`, `totalPrice`, `totalCount` )
-        VALUES ( #{date}, #{totalPrice}, #{totalCount} )
+        INSERT INTO `orders`( `date`, `totalPrice`, `totalCount`, `userId` )
+        VALUES ( #{order.date}, #{order.totalPrice}, #{order.totalCount}, #{userId} )
     </insert>
 
-    <insert id="insertItem" parameterType="Item">
-        <selectKey resultType="long" keyProperty="id" order="AFTER">
-            SELECT `id` FROM `items` WHERE `name`=#{name}
+    <insert id="insertItem">
+        <selectKey resultType="long" keyProperty="item.id" order="AFTER">
+            SELECT `id` FROM `items` WHERE `name`=#{item.name} and `userId`=#{userId}
         </selectKey>
-        INSERT INTO `items`( `name`, `countName`, `price`, `comment` )
-            VALUES ( #{name}, #{countName}, #{price}, #{comment} )
+        INSERT INTO `items`( `name`, `countName`, `price`, `comment`, `userId` )
+            VALUES ( #{item.name}, #{item.countName}, #{item.price}, #{item.comment}, #{userId} )
         ON DUPLICATE KEY UPDATE
-            `name`=#{name},
-            `countName`=#{countName},
-            `price`=#{price},
-            `comment`=#{comment}
+            `name`=#{item.name},
+            `countName`=#{item.countName},
+            `price`=#{item.price},
+            `comment`=#{item.comment},
+            `userId`=#{userId}
     </insert>
 
     <delete id="deleteBuyListById">
@@ -60,7 +61,7 @@
         ON orders.id = OrderItems.orderId
         WHERE orders.id = #{id}-->
         <!-- don't delete data -->
-        UPDATE `Orders` SET `isDeleted`=1 WHERE `orders`.`id` = #{id}
+        UPDATE `Orders` SET `isDeleted`=1 WHERE `orders`.`id` = #{id} and `orders`.`userId` = #{userId}
     </delete>
 
     <delete id="deleteItemById">
@@ -69,12 +70,12 @@
         LEFT JOIN
             OrderItems
         ON Items.id = OrderItems.itemId
-        WHERE Items.id = #{id}
+        WHERE Items.id = #{id} and Items.userId = #{userId}
     </delete>
 
     <update id="updateItem" parameterType="Item">
         UPDATE Items
-        SET `name`=#{name}, `countName`=#{countName}, `price`=#{price}, `comment`=#{comment}
-        WHERE id=#{id}
+        SET `name`=#{item.name}, `countName`=#{item.countName}, `price`=#{item.price}, `comment`=#{item.comment}
+        WHERE id=#{item.id} and userId=#{userId}
     </update>
 </mapper>

@@ -166,4 +166,36 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="07.12.2014-00.25" author="serfeo">
+        <comment>add userId to orders table</comment>
+        <sql>
+            alter table `orders` add column `userId` int(11) NOT NULL DEFAULT 0
+        </sql>
+        <rollback>
+            alter table `orders` drop column `userId`;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="07.12.2014-00.30" author="serfeo">
+        <comment>add userId to items table</comment>
+        <sql>
+            alter table `items` add column `userId` int(11) NOT NULL DEFAULT 0
+        </sql>
+        <rollback>
+            alter table `items` drop column `userId`;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="07.12.2014-00.35" author="serfeo">
+        <comment>extend unique key name in items table</comment>
+        <sql>
+            alter table `items` drop key `name`;
+            alter table `items` add UNIQUE `name_userId_idx`( `name`, `userId` );
+        </sql>
+        <rollback>
+            alter table `items` drop key `name_userId_idx`;
+            alter table `items` add UNIQUE `name`( `name` );
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

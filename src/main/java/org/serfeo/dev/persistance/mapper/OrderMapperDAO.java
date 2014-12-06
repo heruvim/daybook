@@ -18,15 +18,15 @@ public class OrderMapperDAO {
     @Inject
     public OrderMapperDAO( OrderMapper mapper ) { this.mapper = mapper; }
 
-    public List<Order> getAllOrders() { return mapper.getAllOrders(); }
+    public List<Order> getAllOrders( long userId ) { return mapper.getAllOrders( userId ); }
 
-    public List<Item> getAllItems() { return mapper.getAllItems(); }
+    public List<Item> getAllItems( long userId ) { return mapper.getAllItems( userId ); }
 
-    public void insertOrder( Order order ) { mapper.insertOrderData( order ); }
+    public void insertOrder( Order order, long userId ) { mapper.insertOrderData( order, userId ); }
 
-    public void deleteBuyListById( int id ) { mapper.deleteBuyListById( id ); }
+    public void deleteBuyListById( int id, long userId ) { mapper.deleteBuyListById( id, userId ); }
 
-    public BuyList getBuyListById( int id ) { return mapper.getBuyListById( id ); }
+    public BuyList getBuyListById( int id, long userId ) { return mapper.getBuyListById( id, userId ); }
 
     @Transactional( executorType = ExecutorType.BATCH )
     public void insertOrderItem( Collection<OrderItem> orderItems ) {
@@ -35,14 +35,14 @@ public class OrderMapperDAO {
     }
 
     @Transactional( executorType = ExecutorType.BATCH )
-    public void insertItems(Collection<Item> items) {
+    public void insertItems(Collection<Item> items, long userId ) {
         for ( Item item : items )
-            mapper.insertItem( item );
+            mapper.insertItem( item, userId );
     }
 
-    public void insertItem( Item item ) { mapper.insertItem( item ); }
+    public void insertItem( Item item, long userId ) { mapper.insertItem( item, userId ); }
 
-    public void deleteItemById( int id ) { mapper.deleteItemById( id ); }
+    public void deleteItemById( int id, long userId ) { mapper.deleteItemById( id, userId ); }
 
-    public void updateItem( Item item ) { mapper.updateItem( item ); }
+    public void updateItem( Item item, long userId ) { mapper.updateItem( item, userId ); }
 }

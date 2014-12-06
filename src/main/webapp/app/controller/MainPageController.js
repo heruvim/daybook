@@ -1,5 +1,5 @@
 angular.module( "daybook" )
-.controller( "MainPageController", function( $scope, $modal, authService ) {
+.controller( "MainPageController", function( $scope, $modal, authService, AuthSession ) {
     $scope.credentials = {};
 
     $scope.logIn = function() {
@@ -13,7 +13,12 @@ angular.module( "daybook" )
         credentials.verifier = bytes;
 
         authService.auth( credentials, function( data ) {
-            alert( data );
+            if ( data.status ) {
+                if ( data.status === "ok" )
+                    AuthSession.login( { nickname: data.params[ 0 ].value } );
+                else if ( data.status === "error" )
+                    alert( data.params[ 0 ].value );
+            }
         }, function() { alert( "error" ); } );
     }
 
