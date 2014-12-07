@@ -5,7 +5,8 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.servlet.GuiceServletContextListener;
 import org.serfeo.dev.guice.module.PersistenceModule;
-import org.serfeo.dev.guice.module.RestModule;
+import org.serfeo.dev.guice.module.PrivateRestModule;
+import org.serfeo.dev.guice.module.PublicRestModule;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +20,8 @@ public class ContextListener extends GuiceServletContextListener {
     private List<Module> getModules() {
         List<Module> modules = new LinkedList<>();
 
-        modules.add( new RestModule() );
+        modules.add( new PrivateRestModule() );
+        modules.add( new PublicRestModule() );
         modules.add( new PersistenceModule() );
 
         return modules;

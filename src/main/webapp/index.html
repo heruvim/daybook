@@ -5,6 +5,7 @@
     <!--angular modules-->
     <script src='lib/angular/angular.js'></script>
     <script src='lib/angular-resource/angular-resource.js'></script>
+    <script src='lib/angular-cookies/angular-cookies.js'></script>
     <script src='lib/angular-bootstrap/ui-bootstrap-tpls.js'></script>
 
     <!--angular ui -->
@@ -51,14 +52,20 @@
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input ng-model="credentials.login" type="text" class="form-control" placeholder="Login">
-                    <input ng-model="credentials.password" type="password" class="form-control" placeholder="Password">
+                <div ng-show="!isLoggedIn()">
+                    <div class="form-group">
+                        <input ng-model="credentials.login" type="text" class="form-control" placeholder="Login">
+                        <input ng-model="credentials.password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button class="btn btn-default"
+                            ng-disabled="!( credentials.login && credentials.password )"
+                            ng-click="login()">Log in</button>
+                    <button class="btn btn-default" ng-click="signIn()">Sign in</button>
                 </div>
-                <button class="btn btn-default"
-                        ng-disabled="!( credentials.login && credentials.password )"
-                        ng-click="logIn()">Log in</button>
-                <button class="btn btn-default" ng-click="signIn()">Sign in</button>
+                <div ng-show="isLoggedIn()">
+                    <span>{{nickname}}</span>
+                    <button class="btn btn-default" ng-click="logout()">Log out</button>
+                </div>
             </form>
         </div>
     </div>

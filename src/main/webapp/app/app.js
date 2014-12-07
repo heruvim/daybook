@@ -1,5 +1,5 @@
 var dayBookModule = angular.module( 'daybook',
-[ 'ngResource', 'ui.bootstrap', 'ui.router' ] );
+[ 'ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router' ] );
 
 dayBookModule.config( function( $stateProvider, $urlRouterProvider ) {
     $urlRouterProvider.otherwise('/');
@@ -25,6 +25,22 @@ dayBookModule.config( function( $stateProvider, $urlRouterProvider ) {
             templateUrl: 'app/views/calendar.html',
             controller: 'CalendarController'
         });
+} )
+
+.config( function( $httpProvider ) {
+    $httpProvider.interceptors.push( function( $q, $injector ) {
+        return {
+            'responseError': function( rejection ) {
+                if ( rejection.status === 403 ) {
+                    $injector.get( "AuthSession" ).logout();
+                    $injector.get( "$state" ).transitionTo( "main" );
+                    return new Promise( function() {} );
+                }
+
+                return $q.reject( rejection );
+            }
+        };
+    } );
 } )
 
 .run( function( $rootScope, $state, $stateParams, AuthSession ) {

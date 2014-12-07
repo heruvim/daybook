@@ -54,6 +54,19 @@ public class UserResource {
         }
     }
 
+    @Path( "/logout" )
+    @POST
+    @Produces( MediaType.APPLICATION_JSON )
+    public CommonResponse logout( @Context HttpServletRequest request ) {
+        HttpSession session = request.getSession( false );
+        if ( session != null && session.getAttribute( Const.sessionCredentials ) != null ) {
+            session.invalidate();
+            return CommonResponse.ok();
+        } else {
+            return CommonResponse.error();
+        }
+    }
+
     @Path( "/register" )
     @POST
     @Consumes( MediaType.APPLICATION_JSON )
