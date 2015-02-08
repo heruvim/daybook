@@ -1,10 +1,10 @@
 <div class='row'>
     <div class='col-xs-6'>
         <button class='btn btn-default' ng-click='open()'>
-            <span class="glyphicon glyphicon-plus">Add</span>
+            <span class="glyphicon glyphicon-plus" db-localize="common.add"></span>
         </button>
         <button class='btn btn-default' ng-click='saveBuyList()' ng-disabled='!currentListItems.length'>
-            <span class="glyphicon glyphicon-check">Complete</span>
+            <span class="glyphicon glyphicon-check" db-localize="common.complete">Complete</span>
         </button>
 
         <table class='table'>
@@ -12,17 +12,17 @@
                 <tr class="header">
                     <th class='button_column'></th>
                     <th>
-                        <span ng-click="changeOrder( 'name' )">Name</span>
+                        <span ng-click="changeOrder( 'name' )" db-localize="common.name"></span>
                     </th>
                     <th style='width:30px'>
-                        <span ng-click="changeOrder( 'count' )">Count</span>
+                        <span ng-click="changeOrder( 'count' )" db-localize="common.count"></span>
                     </th>
                     <th style='width:30px'></th>
                     <th style='width:50px'>
-                        <span ng-click="changeOrder( 'price' )">Price</span>
+                        <span ng-click="changeOrder( 'price' )" db-localize="common.price"></span>
                     </th>
                     <th style='width:100px'>
-                        <span ng-click="changeOrder( 'comment' )">Comment</span>
+                        <span ng-click="changeOrder( 'comment' )" db-localize="common.comment"></span>
                     </th>
                 </tr>
                 <tr ng-repeat='currentListItem in currentListItems | orderBy:order:reverse'>
@@ -38,7 +38,7 @@
                     <td><span>{{ currentListItem.comment }}</span></td>
                 </tr>
                 <tr>
-                    <td colspan='4'><span style='float: right; padding: 0px 15px;'>Total:</span></td>
+                    <td colspan='4'><span style='float: right; padding: 0px 15px;' db-localize="common.total"></span></td>
                     <td>{{ getTotalPrice() | currency }}</td>
                     <td></td>
                 </tr>
@@ -46,13 +46,15 @@
         </table>
     </div>
     <div class='col-xs-6'>
-        <span class='title'>Prev buy lists:</span>
+        <span class='title' db-localize="buylist.prev"></span>
         <table class="table">
             <tbody>
                 <tr>
                     <th class='button_column'></th>
                     <th class='button_column'></th>
-                    <th>Date</th><th>Price</th><th>Count</th>
+                    <th db-localize="common.date"></th>
+                    <th db-localize="common.price"></th>
+                    <th db-localize="common.count"></th>
                 </tr>
                 <tr ng-repeat='prevBuyList in prevBuyLists'>
                     <td>

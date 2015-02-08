@@ -1,9 +1,9 @@
 <div>
     <div class="modal-header">
-        <h3 class="modal-title inline">Add Item</h3>
+        <h3 class="modal-title inline" db-localize="order.modal.title"></h3>
         <div class="inline save_panel">
             <span>Total items: {{items.length}}</span>
-            <button class="btn" ng-click="saveAndClose()">Save</button>
+            <button class="btn" ng-click="saveAndClose()" db-localize="order.modal.action.save"></button>
         </div>
     </div>
     <div class="modal-body">

@@ -43,8 +43,9 @@ angular.module( "daybook" )
     $scope.signIn = function() {
         var modalInstance = $modal.open({
              templateUrl: 'app/views/modal/registration.html',
-             controller: 'RegistrationController',
-             size: "m"
+             controller:  'RegistrationController',
+             windowClass: 'registration-modal',
+             size:        'm'
         } );
     };
 } );

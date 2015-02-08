@@ -1,57 +1,57 @@
 <div>
     <div class="modal-header">
-        <h3 class="modal-title">New user registration</h3>
+        <h3 class="modal-title" db-localize="registration.title"></h3>
     </div>
     <div class="modal-body">
-        <form class="form-horizontal" name="newUserForm" db-enter-submit="addNewItem()">
+        <form class="form" name="newUserForm" db-enter-submit="addNewItem()">
             <div class="form-group">
-                <label for="login" class="col-sm-2 control-label">Login</label>
-                <div class="col-sm-10" ng-class="{ 'has-error': hasRequiredError( 'login' ) }">
+                <label for="login" class="control-label" db-localize="registration.login"></label>
+                <div ng-class="{ 'has-error': hasRequiredError( 'login' ) }">
                     <input type="text" ng-model="newUser.login" name="login" id="login" required
-                           placeholder="Login" class="form-control" db-default-focus="{isInputFocused}">
+                           db-localize-placeholder="registration.login" class="form-control" db-default-focus="{isInputFocused}">
                     <div class="form_tooltip">
-                        <span ng-show="hasRequiredError( 'login' )">Please, enter login</span>
+                        <span ng-show="hasRequiredError( 'login' )" db-localize="registration.error.login"></span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="nickname" class="col-sm-2 control-label">Nickname</label>
-                <div class="col-sm-10" ng-class="{ 'has-error': hasRequiredError( 'nickname' ) }">
+                <label for="nickname" class="control-label" db-localize="registration.nickname"></label>
+                <div ng-class="{ 'has-error': hasRequiredError( 'nickname' ) }">
                     <input ng-model='newUser.nickname' type="text" name="nickname" required
-                           class="form-control" id="nickname" placeholder="Nickname">
+                           class="form-control" id="nickname" db-localize-placeholder="registration.nickname">
                     <div class="form_tooltip">
-                        <span ng-show="hasRequiredError( 'nickname' )">Please, enter nickname</span>
+                        <span ng-show="hasRequiredError( 'nickname' )" db-localize="registration.error.nickname"></span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-10" ng-class="{ 'has-error': hasRequiredError( 'password' ) }">
+                <label for="password" class="control-label" db-localize="registration.password"></label>
+                <div ng-class="{ 'has-error': hasRequiredError( 'password' ) }">
                     <input ng-model='newUser.password' type="password" name="password" required
-                           class="form-control" id="password" placeholder="Password">
+                           class="form-control" id="password" db-localize-placeholder="registration.password">
                     <div class="form_tooltip">
-                        <span ng-show="hasRequiredError( 'password' )">Please, enter password</span>
+                        <span ng-show="hasRequiredError( 'password' )" db-localize="registration.error.password"></span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="confirm" class="col-sm-2 control-label">Confirm password</label>
-                <div class="col-sm-10" ng-class="{ 'has-error': hasRequiredError( 'confirm' ) || hasConfirmError() }">
+                <label for="confirm" class="control-label" db-localize="registration.password.confirm"></label>
+                <div ng-class="{ 'has-error': hasRequiredError( 'confirm' ) || hasConfirmError() }">
                     <input ng-model='newUser.confirm' type="password" name="confirm" required
-                           class="form-control" id="confirm" placeholder="Confirm Password"
+                           class="form-control" id="confirm" db-localize-placeholder="registration.password.confirm"
                            db-confirm="newUser.password">
                     <div class="form_tooltip">
-                        <span ng-show="hasRequiredError( 'confirm' )">Please, enter confirm</span>
+                        <span ng-show="hasRequiredError( 'confirm' )" db-localize="registration.error.password.confirm"></span>
                     </div>
                     <div class="form_tooltip">
-                        <span ng-show="hasConfirmError()">Password and confirm don't match</span>
+                        <span ng-show="hasConfirmError()" db-localize="registration.error.password.confirm.match"></span>
                     </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn" ng-disabled="newUserForm.$invalid" ng-click="register()">Register</button>
-        <button class="btn" ng-click="close()">Close</button>
+        <button class="btn" ng-disabled="newUserForm.$invalid" ng-click="register()" db-localize="action.register"></button>
+        <button class="btn" ng-click="close()" db-localize="action.close"></button>
     </div>
 </div>
