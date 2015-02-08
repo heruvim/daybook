@@ -5,13 +5,14 @@ angular.module( "daybook" )
 
     $scope.login = function() {
         var credentials = {};
+
         credentials.login = $scope.credentials.login;
+        var hex = ( new jsSHA( $scope.credentials.password, "TEXT" ) ).getHash( "SHA-512", "HEX" );
 
-        var password = CryptoJS.SHA1( $scope.credentials.password );
-        for ( var bytes = [], b = 0; b < password.words.length * 32; b += 8 )
-            bytes.push( ( password.words[ b >>> 5 ] >>> ( 24 - b % 32 ) ) & 0xFF );
-
+        var bytes = [];
+        for ( var i = 0; i < hex.length; i = i + 2 ) bytes.push( parseInt( hex.substr( i, 2 ), 16 ) );
         credentials.verifier = bytes;
+
         $scope.credentials = {};
 
         authService.auth( credentials, function( data ) {

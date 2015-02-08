@@ -15,13 +15,13 @@ public class SRPUtils {
 
     @Inject
     public SRPUtils() {
-        try { this.digest = MessageDigest.getInstance( "SHA-1" ); }
-        catch( NoSuchAlgorithmException e ) { log.error( "SHA-1 algorithm: " + e.getMessage() ); }
+        try { this.digest = MessageDigest.getInstance( "SHA-512" ); }
+        catch( NoSuchAlgorithmException e ) { log.error( "SHA-512 algorithm: " + e.getMessage() ); }
         rnd = new Random( System.currentTimeMillis() );
     }
 
     public byte[] generateSalt() {
-        byte[] salt = new byte[ 20 ];
+        byte[] salt = new byte[ 64 ];
         rnd.nextBytes( salt );
         return salt;
     }

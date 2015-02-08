@@ -223,4 +223,16 @@
         <rollback></rollback>
     </changeSet>
 
+    <changeSet id="08.02.2015-13.20" author="serfeo">
+        <comment>change user salt and verifier column to binary(64)</comment>
+        <sql>
+            alter table `users` modify `salt` binary(64) NOT NULL;
+            alter table `users` modify `verifier` binary(64) NOT NULL;
+        </sql>
+        <rollback>
+            alter table `users` modify `salt` binary(20) NOT NULL;
+            alter table `users` modify `verifier` binary(20) NOT NULL;
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

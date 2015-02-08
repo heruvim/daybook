@@ -74,17 +74,15 @@ angular.module( "daybook" )
         newUser.login = $scope.newUser.login;
         newUser.nickname = $scope.newUser.nickname;
 
-        var password = CryptoJS.SHA1( $scope.newUser.password );
-        for ( var bytes = [], b = 0; b < password.words.length * 32; b += 8 )
-            bytes.push( ( password.words[ b >>> 5 ] >>> ( 24 - b % 32 ) ) & 0xFF );
+        var hex = ( new jsSHA( $scope.newUser.password, "TEXT" ) ).getHash( "SHA-512", "HEX" );
 
+        var bytes = [];
+        for ( var i = 0; i < hex.length; i = i + 2 ) bytes.push( parseInt( hex.substr( i, 2 ), 16 ) );
         newUser.verifier = bytes;
 
         registrationService.save( newUser,
-            function() {
-                $modalInstance.dismiss();
-            },
-            function() { alert( "Error" ); }
+            function() { $modalInstance.dismiss(); },
+            function( error ) { alert( error ); }
         )
     }
 

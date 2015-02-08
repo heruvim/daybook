@@ -56,7 +56,7 @@ angular.module( 'daybook.localization', [] )
             'buylist.prev'    : 'Предыдущие листы покупок',
             'buylists'        : 'Листы покупок',
             'items'           : 'Товары',
-            'itemsStat'       : 'Статистик',
+            'itemsStat'       : 'Статистика',
 
             // login panel
             'login'           : 'Имя пользователя',
