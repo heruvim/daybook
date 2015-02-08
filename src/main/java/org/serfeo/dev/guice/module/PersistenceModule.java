@@ -9,6 +9,7 @@ import org.serfeo.dev.persistance.domain.*;
 import org.serfeo.dev.persistance.mapper.EventMapper;
 import org.serfeo.dev.persistance.mapper.OrderMapper;
 import org.serfeo.dev.persistance.mapper.UserMapper;
+import org.serfeo.dev.persistance.domain.ItemPriceStat;
 
 public class PersistenceModule extends MyBatisModule {
     public static final String JDBC_SCHEMA   = "JDBC.schema";
@@ -39,5 +40,7 @@ public class PersistenceModule extends MyBatisModule {
         addSimpleAlias(BuyList.class);
         addSimpleAlias(BuyList.BuyListItem.class);
         addSimpleAlias(User.class);
+        addSimpleAlias(ItemPriceStat.class);
+        addSimpleAlias(ItemPriceStat.ItemPrice.class);
     }
 }

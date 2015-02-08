@@ -198,4 +198,29 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="08.02.2015-01:25" author="serfeo">
+        <comment>add item price statistic table</comment>
+        <sql>
+            create table `item_price_stat` (
+                `id` int auto_increment,
+                `itemId` int,
+                `price` float,
+                `time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY( `id` )
+            ) ENGINE=InnoDB DEFAULT CHARSET='utf8'
+        </sql>
+        <rollback>
+            drop table `item_price_stat`
+        </rollback>
+    </changeSet>
+
+    <changeSet id="08.02.2015-01.30" author="serfeo">
+        <comment>init price statistic table data</comment>
+        <sql>
+            insert into `item_price_stat`( `itemId`, `price` )
+            select `id` as `itemId`, `price` from items
+        </sql>
+        <rollback></rollback>
+    </changeSet>
+
 </databaseChangeLog>

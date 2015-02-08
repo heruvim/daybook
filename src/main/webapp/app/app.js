@@ -1,5 +1,5 @@
 var dayBookModule = angular.module( 'daybook',
-[ 'ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router' ] );
+[ 'daybook.localization', 'ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router', 'chart.js' ] );
 
 dayBookModule.config( function( $stateProvider, $urlRouterProvider ) {
     $urlRouterProvider.otherwise('/');
@@ -24,7 +24,12 @@ dayBookModule.config( function( $stateProvider, $urlRouterProvider ) {
             url: '/calendar',
             templateUrl: 'app/views/calendar.html',
             controller: 'CalendarController'
-        });
+        })
+        .state( 'itemsStat', {
+            url: '/items/stat',
+            templateUrl: 'app/views/itemStat.html',
+            controller: 'ItemStatController'
+        } );
 } )
 
 .config( function( $httpProvider ) {

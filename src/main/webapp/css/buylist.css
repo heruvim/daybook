@@ -82,3 +82,24 @@ input.filter {
     padding: 2px 10px;
     color: #a94442;
 }
+
+.item-name {
+    width: 400px !important;
+}
+
+.chart-show {
+    width: 600px !important;
+    height: 400px !important;
+}
+
+.chart-hide {
+    height: 0px !important;
+}
+
+chart-legend {
+    display: none !important;
+}
+
+.message {
+    margin-top: 20px;
+}

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="daybook">
 <head>
-    <title>Angular example</title>
+    <meta charset="UTF-8">
+    <title>Daybook</title>
     <!--angular modules-->
     <script src='lib/angular/angular.js'></script>
     <script src='lib/angular-resource/angular-resource.js'></script>
@@ -20,6 +21,11 @@
     <!-- bootstrap -->
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-css-only/css/bootstrap.css">
 
+    <!-- Chart.js -->
+    <link rel="stylesheet" href="lib/angular-chart.js/angular-chart.css">
+    <script src='lib/Chart.js/Chart.min.js'></script>
+    <script src='lib/angular-chart.js/angular-chart.js'></script>
+
     <!-- daybook source -->
     <script src='app/app.js'></script>
 
@@ -27,13 +33,16 @@
     <script src='app/services/CalendarService.js'></script>
     <script src='app/services/BuyListService.js'></script>
     <script src='app/services/UserService.js'></script>
+    <script src='app/services/ItemStatService.js'></script>
     <script src='app/services/AuthSessionService.js'></script>
+    <script src='app/modules/localization/Localization.js'></script>
 
     <!-- controllers -->
     <script src='app/controller/CalendarController.js'></script>
     <script src='app/controller/MainPageController.js'></script>
     <script src='app/controller/BuyListController.js'></script>
     <script src='app/controller/ItemsController.js'></script>
+    <script src='app/controller/ItemStatController.js'></script>
     <script src='app/controller/ModalController.js'></script>
 
     <!-- directives -->
@@ -41,30 +50,32 @@
 
     <link rel="stylesheet" type="text/css" href="css/calendar.css">
     <link rel="stylesheet" type="text/css" href="css/buylist.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-controller="MainPageController">
     <div class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <!--<li><a href='#/calendar'>Calendar</a></li>-->
-                <li><a ui-sref='buylist'>BuyList</a></li>
-                <li><a ui-sref='items'>Items</a></li>
+                <li><a ui-sref='buylist' db-localize="buylists"></a></li>
+                <li><a ui-sref='items' db-localize="items"></a></li>
+                <li><a ui-sref='itemsStat' db-localize="itemsStat"></a></li>
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
                 <div ng-show="!isLoggedIn()">
                     <div class="form-group">
-                        <input ng-model="credentials.login" type="text" class="form-control" placeholder="Login">
-                        <input ng-model="credentials.password" type="password" class="form-control" placeholder="Password">
+                        <input ng-model="credentials.login" type="text" class="form-control" db-localize-placeholder="login">
+                        <input ng-model="credentials.password" type="password" class="form-control" db-localize-placeholder="password">
                     </div>
                     <button class="btn btn-default"
                             ng-disabled="!( credentials.login && credentials.password )"
-                            ng-click="login()">Log in</button>
-                    <button class="btn btn-default" ng-click="signIn()">Sign in</button>
+                            ng-click="login()" db-localize="action.log.in"></button>
+                    <button class="btn btn-default" ng-click="signIn()" db-localize="action.sign.in"></button>
                 </div>
                 <div ng-show="isLoggedIn()">
                     <span>{{nickname}}</span>
-                    <button class="btn btn-default" ng-click="logout()">Log out</button>
+                    <button class="btn btn-default" ng-click="logout()" db-localize="action.log.out"></button>
                 </div>
             </form>
         </div>

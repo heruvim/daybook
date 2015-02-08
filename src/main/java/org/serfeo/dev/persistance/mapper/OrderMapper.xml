@@ -15,6 +15,15 @@
         </collection>
     </resultMap>
 
+    <resultMap id="itemPriceStatMapper" type="ItemPriceStat">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="prices" ofType="ItemPrice">
+            <result property="price" column="price"/>
+            <result property="time" column="time"/>
+        </collection>
+    </resultMap>
+
     <select id="getBuyListById" resultMap="BuyListMapper">
         select * from
             ( select id as buyListId, date from orders where id=#{id} and userId=#{userId} ) orders
@@ -78,4 +87,13 @@
         SET `name`=#{item.name}, `countName`=#{item.countName}, `price`=#{item.price}, `comment`=#{item.comment}
         WHERE id=#{item.id} and userId=#{userId}
     </update>
+
+    <select id="getItemStatByUserId" resultMap="itemPriceStatMapper">
+        select `id`, `name`, `price`, `time` from
+            ( select `id`, `name` from `items` where `userId`=#{userId} ) items
+                JOIN
+            ( select `itemId`, `price`, `time` from `item_price_stat` ) stats
+                ON `items`.`id`=`stats`.`itemId`
+        ORDER BY `time`
+    </select>
 </mapper>

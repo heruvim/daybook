@@ -1,13 +1,13 @@
 package org.serfeo.dev.persistance.mapper;
 
 import com.google.inject.Inject;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.ExecutorType;
 import org.mybatis.guice.transactional.Transactional;
 import org.serfeo.dev.persistance.domain.BuyList;
 import org.serfeo.dev.persistance.domain.Item;
 import org.serfeo.dev.persistance.domain.Order;
 import org.serfeo.dev.persistance.domain.OrderItem;
+import org.serfeo.dev.persistance.domain.ItemPriceStat;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,4 +45,11 @@ public class OrderMapperDAO {
     public void deleteItemById( int id, long userId ) { mapper.deleteItemById( id, userId ); }
 
     public void updateItem( Item item, long userId ) { mapper.updateItem( item, userId ); }
+
+    public Item findItemById( long id ) { return mapper.findItemById( id ); }
+
+    public void addItemPriceStat( Item item ) { mapper.addItemPriceStat( item ); }
+
+    public List< ItemPriceStat > getItemStatByUserId( long userId ) { return mapper.getItemStatByUserId( userId ); }
 }
+

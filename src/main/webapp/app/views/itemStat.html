@@ -1,0 +1,21 @@
+<div>
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="name">Select Item </label>
+            <input type="text" id="name" ng-model="item" class="form-control item-name"
+                   placeholder="Name" db-default-focus="{isInputFocused}"
+                   typeahead="item.name for item in items | filter:$viewValue | limitTo:20"
+                   typeahead-on-select="onItemSelected($item)">
+        </div>
+    </form>
+</div>
+
+<div ng-if="selectedItem.prices && selectedItem.prices.length === 1" class="message">
+    There is stable price: {{selectedItem.prices[ 0 ].price}}
+</div>
+
+<div ng-if="selectedItem.prices && selectedItem.prices.length > 1">
+    <canvas id="line" class="chart chart-line chart-show" data="data"
+            labels="labels" legend="true" series="series">
+    </canvas>
+</div>
